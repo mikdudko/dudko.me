@@ -5,5 +5,9 @@
   // Static site: everything in public/ is served as is, no Worker code.
   "assets": {
     "directory": "./public"
-  }
+  },
+  "routes": [
+    { "pattern": "dudko.me", "custom_domain": true },
+    { "pattern": "www.dudko.me", "custom_domain": true }
+  ]
 }
