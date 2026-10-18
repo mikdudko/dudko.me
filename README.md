@@ -4,11 +4,10 @@ Static site, no build step. Everything in `public/` is what goes live.
 
 ## Deploy
 
-Cloudflare Pages, connected to this GitLab repo:
+Cloudflare Workers (static assets), connected to this GitHub repo (`mikdudko/dudko.me`). `wrangler.jsonc` tells Cloudflare to serve `public/`.
 
-- Production branch: `main`
 - Build command: none (leave empty)
-- Build output directory: `public`
+- Deploy command: `npx wrangler deploy`
 
 Every push to `main` deploys. Other branches get preview URLs.
 
