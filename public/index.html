@@ -379,6 +379,38 @@
       </div>
     </div>
   </div>
+  <div class="widget ship" id="shipping" hidden
+       data-caption='{"one":"{n} contribution · last 4 months","other":"{n} contributions · last 4 months"}'
+       data-day='{"one":"{n} contribution","other":"{n} contributions"}'
+       data-none="nothing shipped" data-today="today. still building" data-ahead="still ahead"
+       data-private="GitLab work is in private projects, so only the counts are public.">
+    <div class="ship-top">
+      <span class="ship-kicker"><span class="ms fill" aria-hidden="true">bolt</span>Shipping</span>
+      <div class="seg" role="group" aria-label="Source">
+        <button type="button" class="seg-btn" data-src="all" aria-pressed="true" data-track="shipping-source" data-track-src="all">All</button>
+        <button type="button" class="seg-btn" data-src="github" aria-pressed="false" data-track="shipping-source" data-track-src="github">GitHub</button>
+        <button type="button" class="seg-btn" data-src="gitlab" aria-pressed="false" data-track="shipping-source" data-track-src="gitlab">GitLab</button>
+      </div>
+    </div>
+    <div class="ship-body">
+      <div class="ship-week">
+        <div class="ship-week-head">
+          <div class="ship-count"><span class="ship-num"><span id="ship-count">0</span><span class="ship-of">/7</span></span><span class="ship-sub">days shipped · this week</span></div>
+          <div class="ship-bars" id="ship-bars" role="group" aria-label="This week"></div>
+        </div>
+        <div class="ship-pick" id="ship-pick" aria-live="polite"></div>
+      </div>
+      <div class="ship-heat-wrap">
+        <div class="ship-sub" id="ship-caption"></div>
+        <div class="ship-heat" id="ship-heat" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="ship-commits" id="ship-commits"></div>
+    <div class="ship-links">
+      <a class="ship-link" href="https://github.com/mikdudko" target="_blank" rel="noopener" data-track="social" data-track-to="github">GitHub<span class="ms" aria-hidden="true">arrow_outward</span></a>
+      <a class="ship-link" href="https://gitlab.com/dudko.mikalai" target="_blank" rel="noopener" data-track="social" data-track-to="gitlab">GitLab<span class="ms" aria-hidden="true">arrow_outward</span></a>
+    </div>
+  </div>
 </section>
 
 <!-- 04 People & life -->
@@ -478,38 +510,6 @@
           <img src="/assets/ig-3.jpg" alt="Instagram post" loading="lazy">
         </div>
       </div>
-    </div>
-  </div>
-  <div class="widget ship" id="shipping" hidden
-       data-caption='{"one":"{n} contribution · last 4 months","other":"{n} contributions · last 4 months"}'
-       data-day='{"one":"{n} contribution","other":"{n} contributions"}'
-       data-none="nothing shipped" data-today="today. still building" data-ahead="still ahead"
-       data-private="GitLab work is in private projects, so only the counts are public.">
-    <div class="ship-top">
-      <span class="ship-kicker"><span class="ms fill" aria-hidden="true">bolt</span>Shipping</span>
-      <div class="seg" role="group" aria-label="Source">
-        <button type="button" class="seg-btn" data-src="all" aria-pressed="true" data-track="shipping-source" data-track-src="all">All</button>
-        <button type="button" class="seg-btn" data-src="github" aria-pressed="false" data-track="shipping-source" data-track-src="github">GitHub</button>
-        <button type="button" class="seg-btn" data-src="gitlab" aria-pressed="false" data-track="shipping-source" data-track-src="gitlab">GitLab</button>
-      </div>
-    </div>
-    <div class="ship-body">
-      <div class="ship-week">
-        <div class="ship-week-head">
-          <div class="ship-count"><span class="ship-num"><span id="ship-count">0</span><span class="ship-of">/7</span></span><span class="ship-sub">days shipped · this week</span></div>
-          <div class="ship-bars" id="ship-bars" role="group" aria-label="This week"></div>
-        </div>
-        <div class="ship-pick" id="ship-pick" aria-live="polite"></div>
-      </div>
-      <div class="ship-heat-wrap">
-        <div class="ship-sub" id="ship-caption"></div>
-        <div class="ship-heat" id="ship-heat" aria-hidden="true"></div>
-      </div>
-    </div>
-    <div class="ship-commits" id="ship-commits"></div>
-    <div class="ship-links">
-      <a class="ship-link" href="https://github.com/mikdudko" target="_blank" rel="noopener" data-track="social" data-track-to="github">GitHub<span class="ms" aria-hidden="true">arrow_outward</span></a>
-      <a class="ship-link" href="https://gitlab.com/dudko.mikalai" target="_blank" rel="noopener" data-track="social" data-track-to="gitlab">GitLab<span class="ms" aria-hidden="true">arrow_outward</span></a>
     </div>
   </div>
 </section>

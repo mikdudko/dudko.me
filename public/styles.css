@@ -347,8 +347,8 @@ section[id] { scroll-margin-top: 8px; }
 .life-col { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
 .life-col > .widget:last-child { flex: 1; }
 
-/* Shipping: dark full-width widget under the life columns, filled from /api/shipping */
-.ship { margin-top: 18px; padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 16px; background: #1c1c1e; color: #fff; box-shadow: 0 10px 30px -14px rgba(0, 0, 0, .4); }
+/* Shipping: dark widget under the fuckup counter in Why, filled from /api/shipping */
+.ship { margin-top: 18px; border-radius: 24px; padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 16px; background: #1c1c1e; color: #fff; box-shadow: 0 10px 30px -14px rgba(0, 0, 0, .4); }
 .ship[hidden] { display: none; }
 .ship-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
 .ship-kicker { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: oklch(0.82 0.19 150); }
