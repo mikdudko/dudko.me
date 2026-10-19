@@ -6,15 +6,37 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const mailto = (subject, body) => `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
+  // Analytics (Umami, loaded by its own script tag; a no-op when it's blocked or not loaded).
+  // Links and buttons opt in with data-track="event-name" plus data-track-<prop>="value";
+  // events that need values known only at click time call track() directly below.
+  const track = (name, data) => {
+    try {
+      if (window.umami) data ? window.umami.track(name, data) : window.umami.track(name);
+    } catch (e) {}
+  };
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-track]');
+    if (!el) return;
+    const data = {};
+    Object.keys(el.dataset).forEach(key => {
+      if (key.length > 5 && key.startsWith('track')) data[key.slice(5).toLowerCase()] = el.dataset[key];
+    });
+    track(el.dataset.track, Object.keys(data).length ? data : undefined);
+  });
+
   // Copy email buttons: the label flips to its "done" text for a moment.
   const copyText = text => {
-    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    try { document.execCommand('copy'); } catch (e) {}
-    ta.remove();
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      ta.remove();
+    };
+    // The Clipboard API can still refuse (no focus, denied permission), so fall back instead of failing silently.
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(fallback);
+    fallback();
     return Promise.resolve();
   };
   $$('[data-copy-email]').forEach(btn => {
@@ -87,6 +109,7 @@
     const subject = `${$('#pitch-is').textContent.trim()} ${chip.textContent.trim()}`;
     const contact = pitchContact.value.trim();
     const body = text + (contact ? `\n\n${pitchForm.dataset.contactLabel} ${contact}` : '');
+    track('pitch-send', { type: chip.dataset.type });
     window.location.href = mailto(subject, body);
   });
 
@@ -100,6 +123,7 @@
     });
     lesson.hidden = !open;
     btn.setAttribute('aria-expanded', String(open));
+    if (open) track('fail-open', { n: btn.getAttribute('aria-controls').replace('fl-', '') });
   }));
   const failsToggle = $('#fails-toggle');
   failsToggle.addEventListener('click', () => {
@@ -107,6 +131,7 @@
     $$('[data-extra]').forEach(row => { row.hidden = !showAll; });
     failsToggle.setAttribute('aria-expanded', String(showAll));
     failsToggle.textContent = showAll ? failsToggle.dataset.less : failsToggle.dataset.more;
+    if (showAll) track('fails-show-all');
   });
 
   // People carousel: position counter and dots follow the scroll.
@@ -130,10 +155,16 @@
   let clicks = 0;
   try { clicks = parseInt(localStorage.getItem(CLK_KEY), 10) || 0; } catch (e) {}
   clkCount.textContent = clicks;
+  let clickerTracked = false;
   $('#clk-btn').addEventListener('click', () => {
     clicks += 1;
     clkCount.textContent = clicks;
     try { localStorage.setItem(CLK_KEY, String(clicks)); } catch (e) {}
+    // Only the first tap per visit: people tap this dozens of times and each event counts against the plan.
+    if (!clickerTracked) {
+      clickerTracked = true;
+      track('clicker-tap');
+    }
   });
 
   // Follow: no newsletter service yet, so the button opens an email listing the picked topics.
@@ -149,10 +180,21 @@
     updateFollow();
   }));
   updateFollow();
+  followBtn.addEventListener('click', () => {
+    const ids = switches.filter(s => s.getAttribute('aria-checked') === 'true').map(s => s.dataset.id);
+    if (ids.length) track('follow-email', { topics: ids.join(',') });
+  });
 
-  // Dock: highlight the section in the middle of the viewport.
+  // Dock: highlight the section in the middle of the viewport. Reaching a section for the
+  // first time also counts as a section-view, which shows how far down people read.
   const dockLinks = $$('.dock a');
-  const setActive = id => dockLinks.forEach(a => a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + id)));
+  const sectionsSeen = new Set(['me']);
+  const setActive = id => {
+    dockLinks.forEach(a => a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + id)));
+    if (sectionsSeen.has(id)) return;
+    sectionsSeen.add(id);
+    track('section-view', { section: id });
+  };
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) setActive(entry.target.id);

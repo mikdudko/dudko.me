@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=ads_click,arrow_downward,arrow_outward,edit_note,expand_more,favorite,groups,mail,notifications_active,person,person_add,person_search,photo_library,route,waving_hand,widgets&display=block">
 <link rel="stylesheet" href="/styles.css">
 <script src="/app.js" defer></script>
+<script async src="https://cloud.umami.is/script.js" data-website-id="1bc620e0-6fc7-48b4-adb7-c1d7dbf7d1a9" data-domains="dudko.me,www.dudko.me"></script>
 </head>
 <body>
 <main>
@@ -35,14 +36,14 @@
     <div class="hero-photo"><img src="/assets/mikalai.jpg" alt="Mikalai Dudko" width="1200" height="795"></div>
     <div class="hero-actions">
       <nav class="lang" aria-label="Language">
-        <a href="/" hreflang="en" lang="en" aria-current="page">EN</a>
-        <a href="/ru/" hreflang="ru" lang="ru">RU</a>
+        <a href="/" hreflang="en" lang="en" data-track="lang-switch" data-track-to="en" aria-current="page">EN</a>
+        <a href="/ru/" hreflang="ru" lang="ru" data-track="lang-switch" data-track-to="ru">RU</a>
       </nav>
-      <button type="button" class="copy-top" data-copy-email data-label="Copy email" data-done="Copied!">Copy email</button>
+      <button type="button" class="copy-top" data-track="copy-email" data-track-where="header" data-copy-email data-label="Copy email" data-done="Copied!">Copy email</button>
     </div>
   </header>
 
-  <h1 class="hero-title">I'm <a class="li" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">Mikalai <img class="inline-icon" src="/assets/linkedin.svg" alt="LinkedIn" style="height:.74em;vertical-align:-.03em"></a> a product manager from Belarus <img class="inline-icon" src="/assets/cornflower.svg" alt="cornflower" style="height:.796em;vertical-align:-.058em"> building <a class="nodly" href="https://nodly.app/" target="_blank" rel="noopener">Nodly <img class="inline-icon" src="/assets/nodly-logo.png" alt="Nodly logo" style="height:.74em;vertical-align:-.03em"></a> in public. Based in Warsaw <img class="inline-icon" src="/assets/mermaid.svg" alt="Warsaw mermaid" style="height:.96em;vertical-align:-.06em"> right now.</h1>
+  <h1 class="hero-title">I'm <a class="li" data-track="social" data-track-to="linkedin" data-track-where="hero" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">Mikalai <img class="inline-icon" src="/assets/linkedin.svg" alt="LinkedIn" style="height:.74em;vertical-align:-.03em"></a> a product manager from Belarus <img class="inline-icon" src="/assets/cornflower.svg" alt="cornflower" style="height:.796em;vertical-align:-.058em"> building <a class="nodly" data-track="nodly-link" data-track-where="hero" href="https://nodly.app/" target="_blank" rel="noopener">Nodly <img class="inline-icon" src="/assets/nodly-logo.png" alt="Nodly logo" style="height:.74em;vertical-align:-.03em"></a> in public. Based in Warsaw <img class="inline-icon" src="/assets/mermaid.svg" alt="Warsaw mermaid" style="height:.96em;vertical-align:-.06em"> right now.</h1>
 
   <a class="explore" href="#journey"><span class="explore-dot"><span class="ms" aria-hidden="true">arrow_downward</span></span>Explore the journey</a>
 
@@ -54,7 +55,7 @@
         <p>for years I was building other people's products.</p>
         <p>yes, I learned a lot. analytics, unit-economics, how to work with teams.</p>
         <p>but I always wanted to create something on my own.</p>
-        <p>so now I'm building <a class="nodly" href="https://nodly.app/" target="_blank" rel="noopener">Nodly <img class="inline-icon" src="/assets/nodly-logo.png" alt="Nodly logo" style="height:.86em;vertical-align:-.1em"></a> with my friends.</p>
+        <p>so now I'm building <a class="nodly" data-track="nodly-link" data-track-where="about" href="https://nodly.app/" target="_blank" rel="noopener">Nodly <img class="inline-icon" src="/assets/nodly-logo.png" alt="Nodly logo" style="height:.86em;vertical-align:-.1em"></a> with my friends.</p>
         <p class="last">in public. with all the fuckups 🙂</p>
       </div>
     </div>
@@ -77,7 +78,7 @@
     <div class="wallet-col">
       <div class="wallet">
         <div class="w-slot w-voice is-open" style="z-index:1">
-          <button type="button" class="w-card" data-station="voice" aria-controls="p-voice" aria-expanded="true">
+          <button type="button" class="w-card" data-track="journey-open" data-track-card="voice" aria-controls="p-voice" aria-expanded="true">
             <span class="w-head">
               <span class="glyph"><span class="g-voice"><i></i><i></i><i></i><i></i><i></i></span></span>
               <span class="w-name">AI voice tool</span>
@@ -95,7 +96,7 @@
           </button>
         </div>
         <div class="w-slot w-nodly" style="z-index:2">
-          <button type="button" class="w-card" data-station="nodly" aria-controls="p-nodly" aria-expanded="false">
+          <button type="button" class="w-card" data-track="journey-open" data-track-card="nodly" aria-controls="p-nodly" aria-expanded="false">
             <span class="w-head">
               <span class="glyph"><span class="g-nodly"><img src="/assets/nodly-logo.png" alt=""></span></span>
               <span class="w-name">Nodly</span>
@@ -113,7 +114,7 @@
           </button>
         </div>
         <div class="w-slot w-dt" style="z-index:3">
-          <button type="button" class="w-card" data-station="dt" aria-controls="p-dt" aria-expanded="false">
+          <button type="button" class="w-card" data-track="journey-open" data-track-card="dt" aria-controls="p-dt" aria-expanded="false">
             <span class="w-head">
               <span class="glyph"><span class="g-dt"><img src="/assets/dt-mark.svg" alt=""></span></span>
               <span class="w-name">Digital Turbine</span>
@@ -131,7 +132,7 @@
           </button>
         </div>
         <div class="w-slot w-pm" style="z-index:4">
-          <button type="button" class="w-card" data-station="pm" aria-controls="p-pm" aria-expanded="false">
+          <button type="button" class="w-card" data-track="journey-open" data-track-card="pm" aria-controls="p-pm" aria-expanded="false">
             <span class="w-head">
               <span class="glyph"><span class="g-pm"><i></i><i></i><i></i></span></span>
               <span class="w-name">Product manager</span>
@@ -168,7 +169,7 @@
           </div>
           <div class="a-cta cta-voice">
             <p><span class="ms fill" aria-hidden="true">person_search</span><span>we're looking for HRs and leads of frontline teams to talk to. know someone? introduce us.</span></p>
-            <a class="pill" href="mailto:dudko.mikalai@gmail.com?subject=HR%20intro%20for%20the%20voice%20tool">Refer an HR<span class="ms" aria-hidden="true">arrow_outward</span></a>
+            <a class="pill" data-track="refer-hr" href="mailto:dudko.mikalai@gmail.com?subject=HR%20intro%20for%20the%20voice%20tool">Refer an HR<span class="ms" aria-hidden="true">arrow_outward</span></a>
           </div>
         </div>
         <div class="a-block ruled">
@@ -198,10 +199,10 @@
           </div>
           <div class="a-cta cta-nodly">
             <p><span class="ms fill" aria-hidden="true">person_search</span><span>we're looking for HRs who want to validate this idea with us and try Nodly for free in Slack.</span></p>
-            <a class="pill" href="https://nodly.app/" target="_blank" rel="noopener">Try it free in Slack<span class="ms" aria-hidden="true">arrow_outward</span></a>
+            <a class="pill" data-track="try-nodly" href="https://nodly.app/" target="_blank" rel="noopener">Try it free in Slack<span class="ms" aria-hidden="true">arrow_outward</span></a>
           </div>
           <div class="a-links">
-            <a class="pill pill-soft" href="https://nodly.app" target="_blank" rel="noopener">nodly.app<span class="ms" aria-hidden="true">arrow_outward</span></a>
+            <a class="pill pill-soft" data-track="nodly-link" data-track-where="journey" href="https://nodly.app" target="_blank" rel="noopener">nodly.app<span class="ms" aria-hidden="true">arrow_outward</span></a>
           </div>
         </div>
         <div class="a-block">
@@ -237,7 +238,7 @@
             <div><b>Owns</b><span>the App object, company-wide</span></div>
           </div>
           <div class="a-links">
-            <a class="pill pill-soft" href="https://www.digitalturbine.com/" target="_blank" rel="noopener">digitalturbine.com<span class="ms" aria-hidden="true">arrow_outward</span></a>
+            <a class="pill pill-soft" data-track="project-link" data-track-to="digitalturbine" href="https://www.digitalturbine.com/" target="_blank" rel="noopener">digitalturbine.com<span class="ms" aria-hidden="true">arrow_outward</span></a>
           </div>
         </div>
       </article>
@@ -257,7 +258,7 @@
             <div><b>Next</b><span>my own</span></div>
           </div>
           <div class="a-links">
-            <a class="pill pill-soft" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">LinkedIn<span class="ms" aria-hidden="true">arrow_outward</span></a>
+            <a class="pill pill-soft" data-track="project-link" data-track-to="linkedin" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">LinkedIn<span class="ms" aria-hidden="true">arrow_outward</span></a>
           </div>
         </div>
         <div class="a-block ruled" style="display:flex;flex-direction:column;gap:24px">
@@ -271,12 +272,12 @@
           <div>
             <div class="label">things I shipped</div>
             <div class="a-apps">
-              <a class="a-app" href="https://apps.apple.com/us/app/intermittent-fasting-and-diet/id6443584386" target="_blank" rel="noopener">
+              <a class="a-app" data-track="project-link" data-track-to="fasting-app" href="https://apps.apple.com/us/app/intermittent-fasting-and-diet/id6443584386" target="_blank" rel="noopener">
                 <img src="/assets/app-fasting.png" alt="" loading="lazy">
                 <span class="a-app-text"><b>Intermittent Fasting and Diet</b><small>iOS · Health &amp; Fitness · ★ 4.7 · 5.3K ratings</small><span>a fasting tracker that lives on subscriptions. this is where I learned why people pay.</span></span>
                 <span class="a-app-view">View</span>
               </a>
-              <a class="a-app" href="https://play.google.com/store/apps/details?id=com.severex.bingo.lottery.number&amp;hl=en" target="_blank" rel="noopener">
+              <a class="a-app" data-track="project-link" data-track-to="bingo-app" href="https://play.google.com/store/apps/details?id=com.severex.bingo.lottery.number&amp;hl=en" target="_blank" rel="noopener">
                 <img src="/assets/app-bingo.png" alt="" loading="lazy">
                 <span class="a-app-text"><b>Bingo Lotto: Win Lucky Number</b><small>Android · casual game · 1M+ downloads · ★ 4.3</small><span>a casual bingo game with a million+ downloads. my crash course in what keeps players coming back.</span></span>
                 <span class="a-app-view">View</span>
@@ -294,10 +295,10 @@
         <form class="pitch-form" id="pitch-form" data-contact-label="Reach me at:">
           <div class="pitch-is" id="pitch-is">I want to pitch</div>
           <div class="chips" role="group" aria-labelledby="pitch-is">
-            <button type="button" class="chip" data-ph="I waste 2 hours every week on..." aria-pressed="true">a problem</button>
-            <button type="button" class="chip" data-ph="an app that..." aria-pressed="false">an idea</button>
-            <button type="button" class="chip" data-ph="let's build ... together" aria-pressed="false">a collab</button>
-            <button type="button" class="chip" data-ph="free on thursday after 6?" aria-pressed="false">a coffee</button>
+            <button type="button" class="chip" data-type="problem" data-ph="I waste 2 hours every week on..." aria-pressed="true">a problem</button>
+            <button type="button" class="chip" data-type="idea" data-ph="an app that..." aria-pressed="false">an idea</button>
+            <button type="button" class="chip" data-type="collab" data-ph="let's build ... together" aria-pressed="false">a collab</button>
+            <button type="button" class="chip" data-type="coffee" data-ph="free on thursday after 6?" aria-pressed="false">a coffee</button>
           </div>
           <textarea class="field" id="pitch-text" rows="3" placeholder="I waste 2 hours every week on..." aria-label="Your pitch"></textarea>
           <div class="field-row">
@@ -315,7 +316,7 @@
 <section id="why" class="why">
   <h2>Why I built this</h2>
   <div class="why-text">
-    <p>Hi, I'm <img class="why-avatar" src="/assets/mikalai-face.jpg" alt=""> <a href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener"><u>Mikalai</u> <img class="inline-icon" src="/assets/linkedin.svg" alt="LinkedIn" style="height:1em;vertical-align:-.15em"></a>, and I build Nodly in public.</p>
+    <p>Hi, I'm <img class="why-avatar" src="/assets/mikalai-face.jpg" alt=""> <a data-track="social" data-track-to="linkedin" data-track-where="why" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener"><u>Mikalai</u> <img class="inline-icon" src="/assets/linkedin.svg" alt="LinkedIn" style="height:1em;vertical-align:-.15em"></a>, and I build Nodly in public.</p>
     <p>for a long time I was <span class="mark">afraid to show anything</span>. but the best defense is offense, so I built this site.</p>
     <p>I built it for three things:</p>
     <ol>
@@ -388,8 +389,8 @@
         <div class="li-foot">
           <span class="li-who"><img src="/assets/mikalai-face.jpg" alt="">Mikalai Dudko</span>
           <span class="li-actions">
-            <a class="pill pill-sm li-read" href="https://www.linkedin.com/feed/update/urn:li:activity:7386739001292111872/" target="_blank" rel="noopener">Read<span class="ms" aria-hidden="true">arrow_outward</span></a>
-            <a class="pill pill-sm li-connect" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener"><span class="ms fill" aria-hidden="true">person_add</span>Connect</a>
+            <a class="pill pill-sm li-read" data-track="social" data-track-to="linkedin-post" href="https://www.linkedin.com/feed/update/urn:li:activity:7386739001292111872/" target="_blank" rel="noopener">Read<span class="ms" aria-hidden="true">arrow_outward</span></a>
+            <a class="pill pill-sm li-connect" data-track="social" data-track-to="linkedin" data-track-where="life" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener"><span class="ms fill" aria-hidden="true">person_add</span>Connect</a>
           </span>
         </div>
       </div>
@@ -436,9 +437,9 @@
         </div>
         <div class="follow-title">pick what you want to get.</div>
         <div class="switches">
-          <button type="button" class="switch" role="switch" aria-checked="true" data-topic="Weekly build log"><span class="switch-text"><b>Weekly build log</b><small>what I built, what broke, what I learned</small></span><span class="track"></span></button>
-          <button type="button" class="switch" role="switch" aria-checked="true" data-topic="Fuckup stories"><span class="switch-text"><b>Fuckup stories</b><small>every fail and the real reason behind it</small></span><span class="track"></span></button>
-          <button type="button" class="switch" role="switch" aria-checked="false" data-topic="PM insights"><span class="switch-text"><b>PM insights</b><small>how to build and validate ideas fast</small></span><span class="track"></span></button>
+          <button type="button" class="switch" data-id="log" role="switch" aria-checked="true" data-topic="Weekly build log"><span class="switch-text"><b>Weekly build log</b><small>what I built, what broke, what I learned</small></span><span class="track"></span></button>
+          <button type="button" class="switch" data-id="fails" role="switch" aria-checked="true" data-topic="Fuckup stories"><span class="switch-text"><b>Fuckup stories</b><small>every fail and the real reason behind it</small></span><span class="track"></span></button>
+          <button type="button" class="switch" data-id="pm" role="switch" aria-checked="false" data-topic="PM insights"><span class="switch-text"><b>PM insights</b><small>how to build and validate ideas fast</small></span><span class="track"></span></button>
         </div>
         <a class="pill pill-dark follow-btn" id="follow-btn" href="mailto:dudko.mikalai@gmail.com" data-subject="Follow: {topics}" data-body="Hi Mikalai, please add me to: {topics}."><span class="ms" aria-hidden="true">mail</span>Follow by email</a>
         <div class="form-note">opens your email app. I add you by hand for now.</div>
@@ -448,7 +449,7 @@
         <div class="ig-who">
           <span class="ig-ring"><img src="/assets/mikalai-face.jpg" alt=""></span>
           <span class="ig-name"><b>Mikalai Dudko</b><small>life outside the build</small></span>
-          <a class="ig-follow" href="https://www.instagram.com/mikalai_dudko/" target="_blank" rel="noopener">Follow</a>
+          <a class="ig-follow" data-track="social" data-track-to="instagram" href="https://www.instagram.com/mikalai_dudko/" target="_blank" rel="noopener">Follow</a>
         </div>
         <div class="ig-grid">
           <img src="/assets/ig-1.jpg" alt="Instagram post" loading="lazy">
@@ -473,17 +474,17 @@
       <p class="strong">no pitch deck needed.</p>
     </div>
     <div class="contact-links">
-      <a class="c-row" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">
+      <a class="c-row" data-track="contact" data-track-via="linkedin" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">
         <span class="c-text"><b>LinkedIn</b><span>mikalai-dudko</span></span>
         <span class="ms" aria-hidden="true">arrow_outward</span>
       </a>
-      <a class="c-row" href="https://t.me/mikalai_dudko" target="_blank" rel="noopener">
+      <a class="c-row" data-track="contact" data-track-via="telegram" href="https://t.me/mikalai_dudko" target="_blank" rel="noopener">
         <span class="c-text"><b>Telegram</b><span>@mikalai_dudko</span></span>
         <span class="ms" aria-hidden="true">arrow_outward</span>
       </a>
       <div class="c-row">
-        <a class="c-text" href="mailto:dudko.mikalai@gmail.com"><b>Email</b><span>dudko.mikalai@gmail.com</span></a>
-        <button type="button" class="c-copy" data-copy-email data-label="copy" data-done="copied">copy</button>
+        <a class="c-text" data-track="contact" data-track-via="email" href="mailto:dudko.mikalai@gmail.com"><b>Email</b><span>dudko.mikalai@gmail.com</span></a>
+        <button type="button" class="c-copy" data-track="copy-email" data-track-where="contact" data-copy-email data-label="copy" data-done="copied">copy</button>
       </div>
     </div>
   </div>
