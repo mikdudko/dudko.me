@@ -1,5 +1,8 @@
-// The API behind the pitch and follow forms. Files in public/ are served before this Worker runs,
-// so it only sees requests that matched no file: /api/pitch, /api/follow and 404s.
+// The site's API. Files in public/ are served before this Worker runs, so it only sees requests
+// that matched no file: the forms (/api/pitch, /api/follow), the Shipping widget (/api/shipping)
+// and 404s.
+import { shipping } from './shipping.js';
+
 // Both forms email Mikalai through Cloudflare Email Routing; the EMAIL binding in wrangler.jsonc
 // can only ever send to his address.
 const TO = 'dudko.mikalai@gmail.com';
@@ -48,8 +51,9 @@ const follow = (env, data, page) => {
 const ROUTES = { '/api/pitch': pitch, '/api/follow': follow };
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.pathname === '/api/shipping') return shipping(request, ctx);
     const route = ROUTES[url.pathname];
     if (!route) return new Response('Not found', { status: 404 });
     if (request.method !== 'POST') return json(405, { error: 'method_not_allowed' });

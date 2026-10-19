@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=ads_click,arrow_downward,arrow_outward,edit_note,expand_more,favorite,groups,mail,notifications_active,person,person_add,person_search,photo_library,route,waving_hand,widgets&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=ads_click,arrow_downward,arrow_outward,bolt,edit_note,expand_more,favorite,groups,mail,notifications_active,person,person_add,person_search,photo_library,route,waving_hand,widgets&display=block">
 <link rel="stylesheet" href="/styles.css">
 <script src="/app.js" defer></script>
 <script async src="https://cloud.umami.is/script.js" data-website-id="1bc620e0-6fc7-48b4-adb7-c1d7dbf7d1a9" data-domains="dudko.me,www.dudko.me"></script>
@@ -478,6 +478,38 @@
           <img src="/assets/ig-3.jpg" alt="Instagram post" loading="lazy">
         </div>
       </div>
+    </div>
+  </div>
+  <div class="widget ship" id="shipping" hidden
+       data-caption='{"one":"{n} contribution · last 4 months","other":"{n} contributions · last 4 months"}'
+       data-day='{"one":"{n} contribution","other":"{n} contributions"}'
+       data-none="nothing shipped" data-today="today. still building" data-ahead="still ahead"
+       data-private="GitLab work is in private projects, so only the counts are public.">
+    <div class="ship-top">
+      <span class="ship-kicker"><span class="ms fill" aria-hidden="true">bolt</span>Shipping</span>
+      <div class="seg" role="group" aria-label="Source">
+        <button type="button" class="seg-btn" data-src="all" aria-pressed="true" data-track="shipping-source" data-track-src="all">All</button>
+        <button type="button" class="seg-btn" data-src="github" aria-pressed="false" data-track="shipping-source" data-track-src="github">GitHub</button>
+        <button type="button" class="seg-btn" data-src="gitlab" aria-pressed="false" data-track="shipping-source" data-track-src="gitlab">GitLab</button>
+      </div>
+    </div>
+    <div class="ship-body">
+      <div class="ship-week">
+        <div class="ship-week-head">
+          <div class="ship-count"><span class="ship-num"><span id="ship-count">0</span><span class="ship-of">/7</span></span><span class="ship-sub">days shipped · this week</span></div>
+          <div class="ship-bars" id="ship-bars" role="group" aria-label="This week"></div>
+        </div>
+        <div class="ship-pick" id="ship-pick" aria-live="polite"></div>
+      </div>
+      <div class="ship-heat-wrap">
+        <div class="ship-sub" id="ship-caption"></div>
+        <div class="ship-heat" id="ship-heat" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="ship-commits" id="ship-commits"></div>
+    <div class="ship-links">
+      <a class="ship-link" href="https://github.com/mikdudko" target="_blank" rel="noopener" data-track="social" data-track-to="github">GitHub<span class="ms" aria-hidden="true">arrow_outward</span></a>
+      <a class="ship-link" href="https://gitlab.com/dudko.mikalai" target="_blank" rel="noopener" data-track="social" data-track-to="gitlab">GitLab<span class="ms" aria-hidden="true">arrow_outward</span></a>
     </div>
   </div>
 </section>

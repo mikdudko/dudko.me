@@ -261,6 +261,97 @@
       .finally(() => { followSending = false; syncFollow(); });
   });
 
+  // Shipping: daily activity from GitHub and GitLab (src/shipping.js), shown as this week's bars,
+  // an 18-week heatmap and the latest public commits. The widget stays hidden if the data can't be
+  // loaded. Day names, relative times and plural rules come from Intl, so the copy stays in the HTML.
+  const ship = $('#shipping');
+  const pageLang = document.documentElement.lang;
+  const node = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  };
+  const plural = (forms, n) => {
+    const f = JSON.parse(forms);
+    return (f[new Intl.PluralRules(pageLang).select(n)] || f.other).replace('{n}', n.toLocaleString(pageLang));
+  };
+  const timeAgo = iso => {
+    const s = (new Date(iso) - Date.now()) / 1000;
+    const rtf = new Intl.RelativeTimeFormat(pageLang, { numeric: 'auto' });
+    for (const [unit, size] of [['month', 2592000], ['day', 86400], ['hour', 3600], ['minute', 60]]) {
+      if (Math.abs(s) >= size) return rtf.format(Math.round(s / size), unit);
+    }
+    return rtf.format(0, 'minute');
+  };
+  const warsawDate = iso => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Warsaw' }).format(new Date(iso));
+  const heatLevel = n => (n === 0 ? 0 : n <= 2 ? 1 : n <= 5 ? 2 : n <= 9 ? 3 : 4);
+  if (ship) fetch('/api/shipping').then(res => (res.ok ? res.json() : Promise.reject(res.status))).then(data => {
+    if (!data.github && !data.gitlab) return;
+    const start = Date.parse(`${data.start}T00:00:00Z`);
+    const dates = (data.github || data.gitlab).map((_, i) => new Date(start + i * 86400000));
+    const iso = dates.map(d => d.toISOString().slice(0, 10));
+    const todayIdx = iso.indexOf(data.today);
+    if (todayIdx < 0) return;
+    const weekStart = iso.length - 7;
+    const dayName = (d, weekday) => {
+      const s = new Intl.DateTimeFormat(pageLang, { weekday, timeZone: 'UTC' }).format(d);
+      return s[0].toUpperCase() + s.slice(1);
+    };
+    let src = 'all';
+    let pick = todayIdx;
+    const counts = () => iso.map((_, i) => (src !== 'gitlab' && data.github ? data.github[i] : 0) + (src !== 'github' && data.gitlab ? data.gitlab[i] : 0));
+    // Only GitHub commits are public; GitLab work shows up as counts alone.
+    const commits = () => (src === 'gitlab' ? [] : data.commits.filter(c => c.at));
+    const dayText = (i, n) => {
+      const c = commits().find(x => warsawDate(x.at) === iso[i]);
+      if (c) return c.msg;
+      if (n > 0) return plural(ship.dataset.day, n);
+      if (i === todayIdx) return ship.dataset.today;
+      return i > todayIdx ? ship.dataset.ahead : ship.dataset.none;
+    };
+
+    // Cells and bars are built once; render() only updates their state.
+    const cells = iso.map(() => $('#ship-heat').appendChild(node('span')));
+    const bars = dates.slice(weekStart).map((d, j) => {
+      const b = node('button', 'ship-bar');
+      b.type = 'button';
+      b.setAttribute('aria-label', dayName(d, 'long'));
+      b.append(node('i'), dayName(d, 'narrow'));
+      ['mouseenter', 'focus', 'click'].forEach(ev => b.addEventListener(ev, () => { pick = weekStart + j; render(); }));
+      return $('#ship-bars').appendChild(b);
+    });
+    const render = () => {
+      const n = counts();
+      cells.forEach((c, i) => { c.className = i > todayIdx ? 'ahead' : `l${heatLevel(n[i])}`; });
+      bars.forEach((b, j) => {
+        const i = weekStart + j;
+        b.className = `ship-bar${n[i] > 0 ? ' on' : ''}${i === todayIdx ? ' today' : ''}${i > todayIdx ? ' ahead' : ''}`;
+        b.setAttribute('aria-pressed', String(i === pick));
+      });
+      $('#ship-count').textContent = n.slice(weekStart, todayIdx + 1).filter(x => x > 0).length;
+      $('#ship-pick').replaceChildren(node('span', null, dayName(dates[pick], 'short')), ` · ${dayText(pick, n[pick])}`);
+      $('#ship-caption').textContent = plural(ship.dataset.caption, n.slice(0, todayIdx + 1).reduce((a, x) => a + x, 0));
+      $('#ship-commits').replaceChildren(...(src === 'gitlab'
+        ? [node('div', 'ship-note', ship.dataset.private)]
+        : commits().slice(0, 2).map(c => {
+          const a = node('a', 'ship-commit');
+          a.href = c.url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.append(node('span', 'ship-src', 'GitHub'), node('span', 'ship-msg', c.msg), node('span', 'ship-meta', `${c.repo} · ${timeAgo(c.at)}`));
+          return a;
+        })));
+    };
+    $$('.seg-btn', ship).forEach(btn => btn.addEventListener('click', () => {
+      src = btn.dataset.src;
+      $$('.seg-btn', ship).forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+      render();
+    }));
+    render();
+    ship.hidden = false;
+  }).catch(() => {});
+
   // Dock: highlight the section in the middle of the viewport. Reaching a section for the
   // first time also counts as a section-view, which shows how far down people read.
   const dockLinks = $$('.dock a');

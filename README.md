@@ -19,6 +19,15 @@ This depends on Cloudflare Email Routing being on for dudko.me with dudko.mikala
 
 Local run: `npx wrangler dev` (needs Node). The email binding is simulated locally: nothing is sent, and wrangler prints where it saved each message.
 
+## Shipping widget
+
+The dark Shipping card under People & life shows this week's days with activity, an 18-week heatmap and the two latest commits, with an All / GitHub / GitLab switch. The page loads it from `/api/shipping` (`src/shipping.js`), which reads public pages only, so no tokens are involved:
+
+- GitHub: daily counts from the contribution calendar at github.com/users/mikdudko/contributions, recent commits from the activity feed at github.com/mikdudko.atom (public repos only).
+- GitLab: daily counts from gitlab.com/users/dudko.mikalai/calendar.json. Work there is in private projects, so it only shows up when "Include private contributions on my profile" is on in GitLab's profile settings, and only as counts.
+
+Responses are cached for an hour (5 minutes if a source failed). If nothing loads, the card stays hidden.
+
 ## Analytics
 
 Umami Cloud (no cookies, so no consent banner); dashboard at cloud.umami.is. The script tag sits in the `<head>` of both pages and only runs on dudko.me and www.dudko.me, so local previews aren't counted.
