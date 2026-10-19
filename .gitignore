@@ -1,3 +1,6 @@
 .DS_Store
 # Screenshots of other people's sites, kept locally for design reference only
 references/
+# Wrangler local state and dependencies
+.wrangler/
+node_modules/

@@ -91,14 +91,20 @@
   fitOpenSlot(false);
   if (document.fonts) document.fonts.ready.then(() => fitOpenSlot(false));
 
-  // Pitch form: no backend yet, so Send opens a prefilled email. Without an email app the mailto:
-  // link does nothing at all, so Send also reveals a Gmail link and a copy button as a way out.
+  // POST to the form API in src/worker.js. Anything but a 2xx counts as a failure, so callers can fall back.
+  const postForm = (path, data) => fetch(path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...data, lang: document.documentElement.lang }),
+  }).then(res => { if (!res.ok) throw new Error(`HTTP ${res.status}`); });
+
+  // Pitch form: Send posts the pitch to the API, which emails it to me. If that fails, the visitor
+  // gets three ways to send it themselves: their email app, Gmail in the browser, or copying the text.
   const pitchForm = $('#pitch-form');
   const chips = $$('.chip');
   const pitchText = $('#pitch-text');
   const pitchContact = $('#pitch-contact');
   const sendBtn = $('.send', pitchForm);
-  const pitchGmail = $('#pitch-gmail');
   const pitchMessage = () => {
     const chip = chips.find(c => c.getAttribute('aria-pressed') === 'true') || chips[0];
     const contact = pitchContact.value.trim();
@@ -108,35 +114,57 @@
       body: pitchText.value.trim() + (contact ? `\n\n${pitchForm.dataset.contactLabel} ${contact}` : ''),
     };
   };
-  const setGmailLink = () => {
+  const setFallbackLinks = () => {
     const { subject, body } = pitchMessage();
-    pitchGmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    $('#pitch-mailto').href = mailto(subject, body);
+    $('#pitch-gmail').href = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
   chips.forEach(chip => chip.addEventListener('click', () => {
     chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
     pitchText.placeholder = chip.dataset.ph;
   }));
-  // Also run on load and on back/forward: a browser that restores the typed text fires no input event,
-  // which used to leave Send disabled next to a filled-in pitch.
-  const syncSend = () => { sendBtn.disabled = pitchText.value.trim().length < 3; };
+  // A contact is required: without one I have no way to reply. No second Send while one is in flight.
+  let pitchSending = false;
+  const pitchReady = () => !pitchSending && pitchText.value.trim().length >= 3 && pitchContact.value.trim().length >= 3;
+  // Also run on load and on back/forward: a browser that restores typed text fires no input event.
+  const syncSend = () => { sendBtn.disabled = !pitchReady(); };
   pitchText.addEventListener('input', syncSend);
+  pitchContact.addEventListener('input', syncSend);
   window.addEventListener('pageshow', syncSend);
   syncSend();
   pitchForm.addEventListener('submit', e => {
     e.preventDefault();
-    if (pitchText.value.trim().length < 3) return;
-    const { type, subject, body } = pitchMessage();
-    track('pitch-send', { type });
-    setGmailLink();
-    $('#pitch-note').hidden = true;
-    $('#pitch-fallback').hidden = false;
-    window.location.href = mailto(subject, body);
+    if (!pitchReady()) return;
+    const { type } = pitchMessage();
+    pitchSending = true;
+    syncSend();
+    postForm('/api/pitch', { type, text: pitchText.value.trim(), contact: pitchContact.value.trim(), website: $('.hp', pitchForm).value })
+      .then(() => {
+        track('pitch-send', { type, result: 'sent' });
+        pitchText.value = '';
+        $('#pitch-note').hidden = false;
+        $('#pitch-fallback').hidden = true;
+        pitchForm.hidden = true;
+        $('#pitch-done').hidden = false;
+      })
+      .catch(() => {
+        track('pitch-send', { type, result: 'failed' });
+        setFallbackLinks();
+        $('#pitch-note').hidden = true;
+        $('#pitch-fallback').hidden = false;
+      })
+      .finally(() => { pitchSending = false; syncSend(); });
   });
-  // The pitch can be edited after Send, so both read the form again when used.
-  pitchGmail.addEventListener('click', setGmailLink);
+  // The pitch can be edited after a failed Send, so the fallbacks read the form again when used.
+  $$('#pitch-mailto, #pitch-gmail').forEach(a => a.addEventListener('click', setFallbackLinks));
   copyButton($('#pitch-copy'), () => {
     const { subject, body } = pitchMessage();
     return `${subject}\n\n${body}`;
+  });
+  $('#pitch-again').addEventListener('click', () => {
+    $('#pitch-done').hidden = true;
+    pitchForm.hidden = false;
+    pitchText.focus();
   });
 
   // Fuckup log: accordion rows, first three shown until "Show all".
@@ -193,22 +221,44 @@
     }
   });
 
-  // Follow: no newsletter service yet, so the button opens an email listing the picked topics.
+  // Follow: no newsletter service yet. The form emails me the address and the picked topics and
+  // I add people by hand; if that fails, the visitor gets a prefilled email link instead.
   const switches = $$('.switch');
-  const followBtn = $('#follow-btn');
-  const updateFollow = () => {
-    const topics = switches.filter(s => s.getAttribute('aria-checked') === 'true').map(s => s.dataset.topic).join(', ');
-    followBtn.setAttribute('aria-disabled', String(topics === ''));
-    followBtn.href = mailto(followBtn.dataset.subject.replace('{topics}', topics), followBtn.dataset.body.replace('{topics}', topics));
-  };
+  const followForm = $('#follow-form');
+  const followEmail = $('#follow-email');
+  const followBtn = $('.follow-btn', followForm);
+  const pickedTopics = () => switches.filter(s => s.getAttribute('aria-checked') === 'true');
+  // Same check as the API, so a typo is caught here rather than coming back as a failed send.
+  let followSending = false;
+  const followReady = () => !followSending && pickedTopics().length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(followEmail.value.trim());
+  const syncFollow = () => { followBtn.disabled = !followReady(); };
   switches.forEach(s => s.addEventListener('click', () => {
     s.setAttribute('aria-checked', String(s.getAttribute('aria-checked') !== 'true'));
-    updateFollow();
+    syncFollow();
   }));
-  updateFollow();
-  followBtn.addEventListener('click', () => {
-    const ids = switches.filter(s => s.getAttribute('aria-checked') === 'true').map(s => s.dataset.id);
-    if (ids.length) track('follow-email', { topics: ids.join(',') });
+  followEmail.addEventListener('input', syncFollow);
+  window.addEventListener('pageshow', syncFollow);
+  syncFollow();
+  followForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!followReady()) return;
+    const picked = pickedTopics();
+    const ids = picked.map(s => s.dataset.id).join(',');
+    followSending = true;
+    syncFollow();
+    postForm('/api/follow', { email: followEmail.value.trim(), topics: picked.map(s => s.dataset.id), website: $('.hp', followForm).value })
+      .then(() => {
+        track('follow-email', { topics: ids, result: 'sent' });
+        followForm.hidden = true;
+        $('#follow-done').hidden = false;
+      })
+      .catch(() => {
+        track('follow-email', { topics: ids, result: 'failed' });
+        const topics = picked.map(s => s.dataset.topic).join(', ');
+        $('#follow-mailto').href = mailto(followForm.dataset.subject.replace('{topics}', topics), followForm.dataset.body.replace('{topics}', topics));
+        $('#follow-fail').hidden = false;
+      })
+      .finally(() => { followSending = false; syncFollow(); });
   });
 
   // Dock: highlight the section in the middle of the viewport. Reaching a section for the

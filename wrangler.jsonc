@@ -2,10 +2,21 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "dudko-me",
   "compatibility_date": "2026-10-01",
-  // Static site: everything in public/ is served as is, no Worker code.
+  // Everything in public/ is served as is. The Worker only runs for requests that match no file,
+  // which in practice means the form API (/api/pitch, /api/follow).
+  "main": "src/worker.js",
   "assets": {
     "directory": "./public"
   },
+  // Needs Email Routing on for dudko.me with this address verified. The binding can only send here,
+  // so the public forms can't be used to email anyone else.
+  "send_email": [
+    { "name": "EMAIL", "destination_address": "dudko.mikalai@gmail.com" }
+  ],
+  // 5 form posts per minute per visitor IP, shared by both forms.
+  "ratelimits": [
+    { "name": "LIMITER", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }
+  ],
   "routes": [
     { "pattern": "dudko.me", "custom_domain": true },
     { "pattern": "www.dudko.me", "custom_domain": true }

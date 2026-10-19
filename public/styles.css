@@ -300,9 +300,14 @@ section[id] { scroll-margin-top: 8px; }
 .send { flex: none; padding: 9px 16px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; cursor: pointer; font-size: 14px; font-weight: 600; transition: opacity .15s ease; }
 .send:disabled { opacity: .4; cursor: default; }
 .form-note { font-size: 12px; color: var(--muted-4); }
+.form-note a { color: inherit; text-decoration: underline; }
+.form-done { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--ink); }
 .pitch-fallback { display: grid; gap: 8px; }
-.pitch-fallback[hidden], .form-note[hidden] { display: none; }
 .pitch-alt { display: flex; flex-wrap: wrap; gap: 6px; }
+.pitch-done { margin-top: 16px; display: grid; gap: 12px; justify-items: start; }
+.pitch-form[hidden], .pitch-fallback[hidden], .pitch-done[hidden], .follow-form[hidden], .form-note[hidden], .form-done[hidden] { display: none; }
+/* Honeypot: off screen for people, still in the form for bots that fill every field. */
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
 /* ---------- 03 Why ---------- */
 .why { max-width: 640px; margin: 0 auto; padding: clamp(112px, 14vw, 176px) clamp(16px, 4vw, 24px) 0; }
@@ -404,7 +409,8 @@ section[id] { scroll-margin-top: 8px; }
 .switch[aria-checked="true"] .track { background: oklch(0.72 0.19 150); }
 .switch[aria-checked="true"] .track::after { transform: translateX(18px); }
 .follow-btn { justify-content: center; width: 100%; padding: 12px 16px; font-size: 15px; }
-.follow-btn[aria-disabled="true"] { opacity: .4; pointer-events: none; }
+.follow-form { display: flex; flex-direction: column; gap: 10px; }
+.follow-btn:disabled { opacity: .4; cursor: default; }
 
 .ig { padding: 16px 18px 18px; }
 .ig-who { display: flex; align-items: center; gap: 12px; }
