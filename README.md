@@ -15,6 +15,8 @@ Every push to `main` deploys. Other branches get preview URLs.
 
 Umami Cloud (no cookies, so no consent banner); dashboard at cloud.umami.is. The script tag sits in the `<head>` of both pages and only runs on dudko.me and www.dudko.me, so local previews aren't counted.
 
+DataFast runs next to it with its cookieless script (`script.cookieless.js`). Its dashboard has "Cookieless / privacy mode" switched on, and the two must match: switching the mode off means swapping in `/js/script.js` and adding a cookie banner.
+
 To track a click, give the element `data-track="event-name"` and, if useful, `data-track-<prop>="value"`. Events that need values known only at click time call `track()` in `app.js`.
 
 ## Layout
