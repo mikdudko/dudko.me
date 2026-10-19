@@ -307,7 +307,14 @@
             <input id="pitch-contact" placeholder="your email or @telegram" aria-label="Your contact">
             <button type="submit" class="send" disabled>Send</button>
           </div>
-          <div class="form-note">opens your email app, then goes straight to my inbox</div>
+          <div class="form-note" id="pitch-note">opens your email app, then goes straight to my inbox</div>
+          <div class="pitch-fallback" id="pitch-fallback" hidden>
+            <div class="form-note">nothing opened? use Gmail, or copy the text and send it to dudko.mikalai@gmail.com</div>
+            <div class="pitch-alt">
+              <a class="pill pill-soft pill-sm" id="pitch-gmail" href="https://mail.google.com/" target="_blank" rel="noopener" data-track="pitch-fallback" data-track-via="gmail">Open in Gmail<span class="ms" aria-hidden="true">arrow_outward</span></a>
+              <button type="button" class="pill pill-soft pill-sm" id="pitch-copy" data-track="pitch-fallback" data-track-via="copy" data-label="Copy text" data-done="Copied!">Copy text</button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

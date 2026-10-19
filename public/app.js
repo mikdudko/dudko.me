@@ -39,16 +39,17 @@
     fallback();
     return Promise.resolve();
   };
-  $$('[data-copy-email]').forEach(btn => {
+  const copyButton = (btn, getText) => {
     let timer;
     btn.addEventListener('click', () => {
-      copyText(EMAIL).finally(() => {
+      copyText(getText()).finally(() => {
         btn.textContent = btn.dataset.done;
         clearTimeout(timer);
         timer = setTimeout(() => { btn.textContent = btn.dataset.label; }, 1800);
       });
     });
-  });
+  };
+  $$('[data-copy-email]').forEach(btn => copyButton(btn, () => EMAIL));
 
   // Journey wallet: one card open at a time, its article shown next to it.
   const slots = $$('.w-slot');
@@ -90,27 +91,52 @@
   fitOpenSlot(false);
   if (document.fonts) document.fonts.ready.then(() => fitOpenSlot(false));
 
-  // Pitch form: no backend yet, so Send opens a prefilled email.
+  // Pitch form: no backend yet, so Send opens a prefilled email. Without an email app the mailto:
+  // link does nothing at all, so Send also reveals a Gmail link and a copy button as a way out.
   const pitchForm = $('#pitch-form');
   const chips = $$('.chip');
   const pitchText = $('#pitch-text');
   const pitchContact = $('#pitch-contact');
   const sendBtn = $('.send', pitchForm);
+  const pitchGmail = $('#pitch-gmail');
+  const pitchMessage = () => {
+    const chip = chips.find(c => c.getAttribute('aria-pressed') === 'true') || chips[0];
+    const contact = pitchContact.value.trim();
+    return {
+      type: chip.dataset.type,
+      subject: `${$('#pitch-is').textContent.trim()} ${chip.textContent.trim()}`,
+      body: pitchText.value.trim() + (contact ? `\n\n${pitchForm.dataset.contactLabel} ${contact}` : ''),
+    };
+  };
+  const setGmailLink = () => {
+    const { subject, body } = pitchMessage();
+    pitchGmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
   chips.forEach(chip => chip.addEventListener('click', () => {
     chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
     pitchText.placeholder = chip.dataset.ph;
   }));
-  pitchText.addEventListener('input', () => { sendBtn.disabled = pitchText.value.trim().length < 3; });
+  // Also run on load and on back/forward: a browser that restores the typed text fires no input event,
+  // which used to leave Send disabled next to a filled-in pitch.
+  const syncSend = () => { sendBtn.disabled = pitchText.value.trim().length < 3; };
+  pitchText.addEventListener('input', syncSend);
+  window.addEventListener('pageshow', syncSend);
+  syncSend();
   pitchForm.addEventListener('submit', e => {
     e.preventDefault();
-    const text = pitchText.value.trim();
-    if (text.length < 3) return;
-    const chip = chips.find(c => c.getAttribute('aria-pressed') === 'true') || chips[0];
-    const subject = `${$('#pitch-is').textContent.trim()} ${chip.textContent.trim()}`;
-    const contact = pitchContact.value.trim();
-    const body = text + (contact ? `\n\n${pitchForm.dataset.contactLabel} ${contact}` : '');
-    track('pitch-send', { type: chip.dataset.type });
+    if (pitchText.value.trim().length < 3) return;
+    const { type, subject, body } = pitchMessage();
+    track('pitch-send', { type });
+    setGmailLink();
+    $('#pitch-note').hidden = true;
+    $('#pitch-fallback').hidden = false;
     window.location.href = mailto(subject, body);
+  });
+  // The pitch can be edited after Send, so both read the form again when used.
+  pitchGmail.addEventListener('click', setGmailLink);
+  copyButton($('#pitch-copy'), () => {
+    const { subject, body } = pitchMessage();
+    return `${subject}\n\n${body}`;
   });
 
   // Fuckup log: accordion rows, first three shown until "Show all".
