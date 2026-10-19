@@ -30,11 +30,33 @@ Responses are cached for an hour (5 minutes if a source failed). If nothing load
 
 ## Analytics
 
-Umami Cloud (no cookies, so no consent banner); dashboard at cloud.umami.is. The script tag sits in the `<head>` of both pages and only runs on dudko.me and www.dudko.me, so local previews aren't counted.
+Umami Cloud only (no cookies, so no consent banner); dashboard at cloud.umami.is. The script tag sits in the `<head>` of both pages and only runs on dudko.me and www.dudko.me, so local previews aren't counted. To leave your own visits out, run `localStorage.setItem('umami.disabled', 1)` once in each browser you use.
 
-DataFast runs next to it with its cookieless script (`script.cookieless.js`). Its dashboard has "Cookieless / privacy mode" switched on, and the two must match: switching the mode off means swapping in `/js/script.js` and adding a cookie banner.
+To track a click, give the element `data-track="event-name"` and, if useful, `data-track-<prop>="value"`. Events that need values known only at click time call `track()` in `app.js`; `trackOnce()` sends an event at most once per visit. Every event carries `lang=en|ru`. Untagged links that leave the site are still caught as `outbound` with `to=<host>` (or `mailto`).
 
-To track a click, give the element `data-track="event-name"` and, if useful, `data-track-<prop>="value"`. Events that need values known only at click time call `track()` in `app.js`. Form events (`pitch-send`, `follow-email`) carry `result=sent|failed`; clicks on the pitch fallbacks are `pitch-fallback` with `via=mailto|gmail|copy`.
+| Event | When | Properties |
+|---|---|---|
+| `section-view` | a section reaches the middle of the screen for the first time | `section` |
+| `dock` | a click in the bottom dock | `to` |
+| `explore` | the hero's "Explore the journey" link | |
+| `lang-switch` | the EN/RU switch | `to` |
+| `journey-open` | a wallet card is opened | `card` |
+| `pitch-type` | a pitch chip is picked | `type` |
+| `pitch-start` | first typing in the pitch form (once per visit) | `type` |
+| `pitch-send` | the pitch form is sent | `type`, `result=sent\|failed` |
+| `pitch-fallback` | a fallback after a failed send | `via=mailto\|gmail\|copy` |
+| `pitch-again` | "Send another" | |
+| `follow-start` | first typing in the follow email (once per visit) | |
+| `follow-email` | the follow form is sent | `topics`, `result=sent\|failed` |
+| `follow-fallback` | the email link after a failed follow | |
+| `fail-open`, `fails-show-all` | the fuckup log | `n` |
+| `clicker-tap` | the "I failed" clicker (once per visit) | |
+| `carousel-swipe` | the people carousel is swiped (once per visit) | |
+| `shipping-source`, `shipping-commit` | the Shipping widget | `src`, `repo` |
+| `copy-email`, `contact`, `social`, `nodly-link`, `try-nodly`, `refer-hr`, `project-link` | contact and outbound links | `where`, `via`, `to` |
+| `outbound` | any other link leaving the site | `to` |
+
+Useful funnels in Umami: `section-view` (journey) → `pitch-start` → `pitch-send` (sent), and `section-view` (life) → `follow-start` → `follow-email` (sent).
 
 ## Layout
 

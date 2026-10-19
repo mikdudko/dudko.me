@@ -26,8 +26,6 @@
 <link rel="stylesheet" href="/styles.css">
 <script src="/app.js" defer></script>
 <script async src="https://cloud.umami.is/script.js" data-website-id="1bc620e0-6fc7-48b4-adb7-c1d7dbf7d1a9" data-domains="dudko.me,www.dudko.me"></script>
-<script>window.datafast = window.datafast || function () { window.datafast.q = window.datafast.q || []; window.datafast.q.push(arguments); };</script>
-<script defer src="https://datafa.st/js/script.cookieless.js" data-website-id="dfid_YxeJi2J76zVnLRLivOvQc" data-domain="dudko.me"></script>
 </head>
 <body>
 <main>
@@ -47,7 +45,7 @@
 
   <h1 class="hero-title">I'm <a class="li" data-track="social" data-track-to="linkedin" data-track-where="hero" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">Mikalai <img class="inline-icon" src="/assets/linkedin.svg" alt="LinkedIn" style="height:.74em;vertical-align:-.03em"></a> a product manager from Belarus <img class="inline-icon" src="/assets/cornflower.svg" alt="cornflower" style="height:.796em;vertical-align:-.058em"> building <a class="nodly" data-track="nodly-link" data-track-where="hero" href="https://nodly.app/" target="_blank" rel="noopener">Nodly <img class="inline-icon" src="/assets/nodly-logo.png" alt="Nodly logo" style="height:.74em;vertical-align:-.03em"></a> in public. Based in Warsaw <img class="inline-icon" src="/assets/mermaid.svg" alt="Warsaw mermaid" style="height:.96em;vertical-align:-.06em"> right now.</h1>
 
-  <a class="explore" href="#journey"><span class="explore-dot"><span class="ms" aria-hidden="true">arrow_downward</span></span>Explore the journey</a>
+  <a class="explore" href="#journey" data-track="explore"><span class="explore-dot"><span class="ms" aria-hidden="true">arrow_downward</span></span>Explore the journey</a>
 
   <div class="about">
     <div class="about-col">
@@ -297,10 +295,10 @@
         <form class="pitch-form" id="pitch-form" data-contact-label="Reach me at:">
           <div class="pitch-is" id="pitch-is">I want to pitch</div>
           <div class="chips" role="group" aria-labelledby="pitch-is">
-            <button type="button" class="chip" data-type="problem" data-ph="I waste 2 hours every week on..." aria-pressed="true">a problem</button>
-            <button type="button" class="chip" data-type="idea" data-ph="an app that..." aria-pressed="false">an idea</button>
-            <button type="button" class="chip" data-type="collab" data-ph="let's build ... together" aria-pressed="false">a collab</button>
-            <button type="button" class="chip" data-type="coffee" data-ph="free on thursday after 6?" aria-pressed="false">a coffee</button>
+            <button type="button" class="chip" data-type="problem" data-track="pitch-type" data-track-type="problem" data-ph="I waste 2 hours every week on..." aria-pressed="true">a problem</button>
+            <button type="button" class="chip" data-type="idea" data-track="pitch-type" data-track-type="idea" data-ph="an app that..." aria-pressed="false">an idea</button>
+            <button type="button" class="chip" data-type="collab" data-track="pitch-type" data-track-type="collab" data-ph="let's build ... together" aria-pressed="false">a collab</button>
+            <button type="button" class="chip" data-type="coffee" data-track="pitch-type" data-track-type="coffee" data-ph="free on thursday after 6?" aria-pressed="false">a coffee</button>
           </div>
           <textarea class="field" id="pitch-text" rows="3" placeholder="I waste 2 hours every week on..." aria-label="Your pitch"></textarea>
           <div class="field-row">
@@ -320,7 +318,7 @@
         </form>
         <div class="pitch-done" id="pitch-done" hidden>
           <div class="form-done">Sent! it's in my inbox now.</div>
-          <button type="button" class="pill pill-soft pill-sm" id="pitch-again">Send another</button>
+          <button type="button" class="pill pill-soft pill-sm" id="pitch-again" data-track="pitch-again">Send another</button>
         </div>
       </div>
     </div>
@@ -506,7 +504,7 @@
           <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="pill pill-dark follow-btn" disabled><span class="ms" aria-hidden="true">mail</span>Follow by email</button>
           <div class="form-note">I add you by hand for now.</div>
-          <div class="form-note" id="follow-fail" hidden>couldn't sign you up from here. email me at <a id="follow-mailto" href="mailto:dudko.mikalai@gmail.com">dudko.mikalai@gmail.com</a></div>
+          <div class="form-note" id="follow-fail" hidden>couldn't sign you up from here. email me at <a id="follow-mailto" data-track="follow-fallback" href="mailto:dudko.mikalai@gmail.com">dudko.mikalai@gmail.com</a></div>
         </form>
         <div class="form-done" id="follow-done" hidden>Done, you're on the list.</div>
       </div>
@@ -562,11 +560,11 @@
 </main>
 
 <nav class="dock" aria-label="Site">
-  <a href="#me" aria-current="true"><span class="ms" aria-hidden="true">person</span><span>Me</span></a>
-  <a href="#journey" class="live"><span class="ms" aria-hidden="true">route</span><span>Journey</span></a>
-  <a href="#why"><span class="ms" aria-hidden="true">edit_note</span><span>Why</span></a>
-  <a href="#life"><span class="ms" aria-hidden="true">widgets</span><span>Life</span></a>
-  <a href="#contact"><span class="ms" aria-hidden="true">waving_hand</span><span>Contact</span></a>
+  <a href="#me" data-track="dock" data-track-to="me" aria-current="true"><span class="ms" aria-hidden="true">person</span><span>Me</span></a>
+  <a href="#journey" data-track="dock" data-track-to="journey" class="live"><span class="ms" aria-hidden="true">route</span><span>Journey</span></a>
+  <a href="#why" data-track="dock" data-track-to="why"><span class="ms" aria-hidden="true">edit_note</span><span>Why</span></a>
+  <a href="#life" data-track="dock" data-track-to="life"><span class="ms" aria-hidden="true">widgets</span><span>Life</span></a>
+  <a href="#contact" data-track="dock" data-track-to="contact"><span class="ms" aria-hidden="true">waving_hand</span><span>Contact</span></a>
 </nav>
 </body>
 </html>

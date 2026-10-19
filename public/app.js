@@ -9,19 +9,34 @@
   // Analytics (Umami, loaded by its own script tag; a no-op when it's blocked or not loaded).
   // Links and buttons opt in with data-track="event-name" plus data-track-<prop>="value";
   // events that need values known only at click time call track() directly below.
+  // Every event carries the page language, so EN and RU can be compared on one event.
   const track = (name, data) => {
     try {
-      if (window.umami) data ? window.umami.track(name, data) : window.umami.track(name);
+      if (window.umami) window.umami.track(name, { lang: document.documentElement.lang, ...data });
     } catch (e) {}
+  };
+  // Track something once per visit: some controls get used dozens of times and every event counts against the plan.
+  const tracked = new Set();
+  const trackOnce = (name, data) => {
+    if (tracked.has(name)) return;
+    tracked.add(name);
+    track(name, data);
   };
   document.addEventListener('click', e => {
     const el = e.target.closest('[data-track]');
-    if (!el) return;
-    const data = {};
-    Object.keys(el.dataset).forEach(key => {
-      if (key.length > 5 && key.startsWith('track')) data[key.slice(5).toLowerCase()] = el.dataset[key];
-    });
-    track(el.dataset.track, Object.keys(data).length ? data : undefined);
+    if (el) {
+      const data = {};
+      Object.keys(el.dataset).forEach(key => {
+        if (key.length > 5 && key.startsWith('track')) data[key.slice(5).toLowerCase()] = el.dataset[key];
+      });
+      track(el.dataset.track, data);
+      return;
+    }
+    // Safety net for links nobody tagged: anything leaving the site still shows up, by destination.
+    const a = e.target.closest('a[href]');
+    if (!a || a.protocol === 'javascript:') return;
+    if (a.protocol === 'mailto:' || a.protocol === 'tel:') track('outbound', { to: a.protocol.slice(0, -1) });
+    else if (a.host && a.host !== location.host) track('outbound', { to: a.host.replace(/^www\./, '') });
   });
 
   // Copy email buttons: the label flips to its "done" text for a moment.
@@ -130,6 +145,8 @@
   const syncSend = () => { sendBtn.disabled = !pitchReady(); };
   pitchText.addEventListener('input', syncSend);
   pitchContact.addEventListener('input', syncSend);
+  // Starting to type is the top of the pitch funnel: compare pitch-start with pitch-send.
+  [pitchText, pitchContact].forEach(field => field.addEventListener('input', () => trackOnce('pitch-start', { type: pitchMessage().type })));
   window.addEventListener('pageshow', syncSend);
   syncSend();
   pitchForm.addEventListener('submit', e => {
@@ -199,6 +216,7 @@
     const i = Math.max(0, Math.min(dots.length - 1, Math.round(carousel.scrollLeft / step)));
     if (i === idx) return;
     idx = i;
+    trackOnce('carousel-swipe');
     dots.forEach((d, j) => d.classList.toggle('on', j === i));
     pos.textContent = `${i + 1} / ${dots.length}`;
   }, { passive: true });
@@ -209,16 +227,11 @@
   let clicks = 0;
   try { clicks = parseInt(localStorage.getItem(CLK_KEY), 10) || 0; } catch (e) {}
   clkCount.textContent = clicks;
-  let clickerTracked = false;
   $('#clk-btn').addEventListener('click', () => {
     clicks += 1;
     clkCount.textContent = clicks;
     try { localStorage.setItem(CLK_KEY, String(clicks)); } catch (e) {}
-    // Only the first tap per visit: people tap this dozens of times and each event counts against the plan.
-    if (!clickerTracked) {
-      clickerTracked = true;
-      track('clicker-tap');
-    }
+    trackOnce('clicker-tap');
   });
 
   // Follow: no newsletter service yet. The form emails me the address and the picked topics and
@@ -237,6 +250,7 @@
     syncFollow();
   }));
   followEmail.addEventListener('input', syncFollow);
+  followEmail.addEventListener('input', () => trackOnce('follow-start'));
   window.addEventListener('pageshow', syncFollow);
   syncFollow();
   followForm.addEventListener('submit', e => {
@@ -339,6 +353,8 @@
           a.href = c.url;
           a.target = '_blank';
           a.rel = 'noopener';
+          a.dataset.track = 'shipping-commit';
+          a.dataset.trackRepo = c.repo;
           a.append(node('span', 'ship-src', 'GitHub'), node('span', 'ship-msg', c.msg), node('span', 'ship-meta', `${c.repo} · ${timeAgo(c.at)}`));
           return a;
         })));
