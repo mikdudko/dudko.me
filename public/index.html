@@ -3,23 +3,503 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mikalai Dudko</title>
-<meta name="description" content="Mikalai Dudko builds small startups in public.">
-<style>
-  :root { --bg: #fbfbfd; --ink: #1d1d1f; --ink-2: #6e6e73; color-scheme: light dark; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #000; --ink: #f5f5f7; --ink-2: #a1a1a6; } }
-  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--ink);
-    font: 17px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 0 16px; text-align: center; }
-  h1 { font: 600 clamp(2rem, 6vw, 3.5rem)/1.1 ui-serif, Georgia, serif; letter-spacing: -0.03em; margin: 0 0 12px; }
-  p { margin: 0; color: var(--ink-2); }
-  a { color: inherit; }
-</style>
+<title>Mikalai Dudko - building Nodly in public</title>
+<meta name="description" content="Mikalai Dudko, product manager turned founder from Warsaw. Building Nodly in public: every version, every pivot and a public fuckup log.">
+<link rel="canonical" href="https://dudko.me/">
+<link rel="alternate" hreflang="en" href="https://dudko.me/">
+<link rel="alternate" hreflang="ru" href="https://dudko.me/ru/">
+<link rel="alternate" hreflang="x-default" href="https://dudko.me/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:url" content="https://dudko.me/">
+<meta property="og:title" content="Mikalai Dudko - building Nodly in public">
+<meta property="og:description" content="Product manager turned founder from Warsaw. Every version, every pivot and a public fuckup log.">
+<meta property="og:image" content="https://dudko.me/assets/mikalai.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f7f7f8">
+<link rel="icon" href="/assets/mikalai-face.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=ads_click,arrow_downward,arrow_outward,edit_note,expand_more,favorite,groups,mail,notifications_active,person,person_add,person_search,photo_library,route,waving_hand,widgets&display=block">
+<link rel="stylesheet" href="/styles.css">
+<script src="/app.js" defer></script>
 </head>
 <body>
-  <main>
-    <h1>Mikalai Dudko</h1>
-    <p>I build small startups in public. The full site is coming soon.</p>
-    <p>Meanwhile: <a href="https://nodly.app">nodly.app</a></p>
-  </main>
+<main>
+
+<!-- 01 Hero + about -->
+<section id="me" class="wrap hero">
+  <header class="hero-top">
+    <div class="hero-photo"><img src="/assets/mikalai.jpg" alt="Mikalai Dudko" width="1200" height="795"></div>
+    <div class="hero-actions">
+      <nav class="lang" aria-label="Language">
+        <a href="/" hreflang="en" lang="en" aria-current="page">EN</a>
+        <a href="/ru/" hreflang="ru" lang="ru">RU</a>
+      </nav>
+      <button type="button" class="copy-top" data-copy-email data-label="Copy email" data-done="Copied!">Copy email</button>
+    </div>
+  </header>
+
+  <h1 class="hero-title">I'm <a class="li" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">Mikalai <img class="inline-icon" src="/assets/linkedin.svg" alt="LinkedIn" style="height:.74em;vertical-align:-.03em"></a> a product manager from Belarus <img class="inline-icon" src="/assets/cornflower.svg" alt="cornflower" style="height:.796em;vertical-align:-.058em"> building <a class="nodly" href="https://nodly.app/" target="_blank" rel="noopener">Nodly <img class="inline-icon" src="/assets/nodly-logo.png" alt="Nodly logo" style="height:.74em;vertical-align:-.03em"></a> in public. Based in Warsaw <img class="inline-icon" src="/assets/mermaid.svg" alt="Warsaw mermaid" style="height:.96em;vertical-align:-.06em"> right now.</h1>
+
+  <a class="explore" href="#journey"><span class="explore-dot"><span class="ms" aria-hidden="true">arrow_downward</span></span>Explore the journey</a>
+
+  <div class="about">
+    <div class="about-col">
+      <div class="label">About</div>
+      <div class="about-text">
+        <p>I'm a product manager from Warsaw.</p>
+        <p>for years I was building other people's products.</p>
+        <p>yes, I learned a lot. analytics, unit-economics, how to work with teams.</p>
+        <p>but I always wanted to create something on my own.</p>
+        <p>so now I'm building <a class="nodly" href="https://nodly.app/" target="_blank" rel="noopener">Nodly <img class="inline-icon" src="/assets/nodly-logo.png" alt="Nodly logo" style="height:.86em;vertical-align:-.1em"></a> with my friends.</p>
+        <p class="last">in public. with all the fuckups 🙂</p>
+      </div>
+    </div>
+    <div class="facts-col">
+      <dl class="facts-card">
+        <div><dt class="label">Now building</dt><dd><span class="pulse" aria-hidden="true"></span><span>AI voice tool · idea validation</span></dd></div>
+        <div><dt class="label">Based in</dt><dd>Warsaw, Poland</dd></div>
+        <div><dt class="label">Path</dt><dd>product manager → founder</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 02 Journey -->
+<section id="journey" class="wrap journey">
+  <h2 class="section-title">The journey</h2>
+  <p class="section-sub">every project I've built, from the first one to now. tap one to see the story.</p>
+
+  <div class="journey-grid">
+    <div class="wallet-col">
+      <div class="wallet">
+        <div class="w-slot w-voice is-open" style="z-index:1">
+          <button type="button" class="w-card" data-station="voice" aria-controls="p-voice" aria-expanded="true">
+            <span class="w-head">
+              <span class="glyph"><span class="g-voice"><i></i><i></i><i></i><i></i><i></i></span></span>
+              <span class="w-name">AI voice tool</span>
+              <span class="w-when"></span>
+              <span class="w-open"><span class="w-open-text">open</span><span class="ms" aria-hidden="true">expand_more</span></span>
+            </span>
+            <span class="w-status-label">Status</span>
+            <span class="w-status"><span class="pulse" aria-hidden="true"></span>building now</span>
+            <span class="w-line">an AI voice tool that collects real feedback from frontline teams.</span>
+            <span class="w-facts">
+              <span><b>Stage</b><i>idea validation</i></span>
+              <span><b>For</b><i>HR + frontline teams</i></span>
+              <span><b>Team</b><i>me + friends</i></span>
+            </span>
+          </button>
+        </div>
+        <div class="w-slot w-nodly" style="z-index:2">
+          <button type="button" class="w-card" data-station="nodly" aria-controls="p-nodly" aria-expanded="false">
+            <span class="w-head">
+              <span class="glyph"><span class="g-nodly"><img src="/assets/nodly-logo.png" alt=""></span></span>
+              <span class="w-name">Nodly</span>
+              <span class="w-when">2025</span>
+              <span class="w-open"><span class="w-open-text">open</span><span class="ms" aria-hidden="true">expand_more</span></span>
+            </span>
+            <span class="w-status-label">Status</span>
+            <span class="w-status"><span class="dot" aria-hidden="true"></span>validating the idea</span>
+            <span class="w-line">boost team engagement without manual work.</span>
+            <span class="w-facts">
+              <span><b>For</b><i>HR + People teams</i></span>
+              <span><b>Model</b><i>B2B, in Slack</i></span>
+              <span><b>Price</b><i>free to try</i></span>
+            </span>
+          </button>
+        </div>
+        <div class="w-slot w-dt" style="z-index:3">
+          <button type="button" class="w-card" data-station="dt" aria-controls="p-dt" aria-expanded="false">
+            <span class="w-head">
+              <span class="glyph"><span class="g-dt"><img src="/assets/dt-mark.svg" alt=""></span></span>
+              <span class="w-name">Digital Turbine</span>
+              <span class="w-when">now</span>
+              <span class="w-open"><span class="w-open-text">open</span><span class="ms" aria-hidden="true">expand_more</span></span>
+            </span>
+            <span class="w-status-label">Status</span>
+            <span class="w-status"><span class="dot" aria-hidden="true"></span>working here now</span>
+            <span class="w-line">internal tools used by different teams across the company.</span>
+            <span class="w-facts">
+              <span><b>Role</b><i>Senior PM</i></span>
+              <span><b>Team</b><i>App Mgmt</i></span>
+              <span><b>For</b><i>internal teams</i></span>
+            </span>
+          </button>
+        </div>
+        <div class="w-slot w-pm" style="z-index:4">
+          <button type="button" class="w-card" data-station="pm" aria-controls="p-pm" aria-expanded="false">
+            <span class="w-head">
+              <span class="glyph"><span class="g-pm"><i></i><i></i><i></i></span></span>
+              <span class="w-name">Product manager</span>
+              <span class="w-when">before</span>
+              <span class="w-open"><span class="w-open-text">open</span><span class="ms" aria-hidden="true">expand_more</span></span>
+            </span>
+            <span class="w-status-label">Status</span>
+            <span class="w-status"><span class="dot" aria-hidden="true"></span>shipped</span>
+            <span class="w-line">years of building different products.</span>
+            <span class="w-facts">
+              <span><b>Built</b><i>subscription apps + games</i></span>
+              <span><b>Best hit</b><i>+95% ARPPU</i></span>
+              <span><b>Next</b><i>my own</i></span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="tap-hint">tap a card to open it</div>
+    </div>
+
+    <div class="articles">
+      <article id="p-voice" class="article">
+        <div class="a-main">
+          <div class="a-meta">
+            <span class="a-status"><span class="pulse" aria-hidden="true"></span>building now</span>
+          </div>
+          <h3 class="a-name">AI voice tool</h3>
+          <p class="a-line">an AI voice tool that collects real feedback from frontline teams.</p>
+          <p class="a-desc">builders on a site, or an IT team that HR wants to understand better. people just talk, and the AI turns it into honest feedback about engagement. I'm building it with my friends, and right now we're validating the idea.</p>
+          <div class="a-facts">
+            <div><b>Stage</b><span>idea validation</span></div>
+            <div><b>For</b><span>HR + frontline teams</span></div>
+            <div><b>Team</b><span>me + friends</span></div>
+          </div>
+          <div class="a-cta cta-voice">
+            <p><span class="ms fill" aria-hidden="true">person_search</span><span>we're looking for HRs and leads of frontline teams to talk to. know someone? introduce us.</span></p>
+            <a class="pill" href="mailto:dudko.mikalai@gmail.com?subject=HR%20intro%20for%20the%20voice%20tool">Refer an HR<span class="ms" aria-hidden="true">arrow_outward</span></a>
+          </div>
+        </div>
+        <div class="a-block ruled">
+          <div class="label">what I'm testing right now</div>
+          <ol class="a-points">
+            <li data-n="01">is this a real pain for HR teams?</li>
+            <li data-n="02">will frontline workers talk honestly to an AI?</li>
+            <li data-n="03">which companies will try it first?</li>
+          </ol>
+        </div>
+      </article>
+
+      <article id="p-nodly" class="article" hidden>
+        <div class="a-main">
+          <div class="a-meta">
+            <span class="a-when">2025 - now</span>
+            <span class="a-status"><span class="dot" style="background:var(--violet)" aria-hidden="true"></span>validating the idea</span>
+            <span class="a-tag">Team engagement</span>
+          </div>
+          <h3 class="a-name">Nodly</h3>
+          <p class="a-line">boost team engagement without manual work.</p>
+          <p class="a-desc">a Slack bot that learns what your team is into and plans real meetups around it, from pottery classes to running clubs.</p>
+          <div class="a-facts">
+            <div><b>For</b><span>HR + People teams</span></div>
+            <div><b>Model</b><span>B2B, in Slack</span></div>
+            <div><b>Price</b><span>free to try</span></div>
+          </div>
+          <div class="a-cta cta-nodly">
+            <p><span class="ms fill" aria-hidden="true">person_search</span><span>we're looking for HRs who want to validate this idea with us and try Nodly for free in Slack.</span></p>
+            <a class="pill" href="https://nodly.app/" target="_blank" rel="noopener">Try it free in Slack<span class="ms" aria-hidden="true">arrow_outward</span></a>
+          </div>
+          <div class="a-links">
+            <a class="pill pill-soft" href="https://nodly.app" target="_blank" rel="noopener">nodly.app<span class="ms" aria-hidden="true">arrow_outward</span></a>
+          </div>
+        </div>
+        <div class="a-block">
+          <div class="label">what teams do with Nodly</div>
+          <div class="a-photos">
+            <figure class="a-photo"><img src="/assets/nodly-pottery-class.jpg" alt="Pottery class" loading="lazy"><figcaption>pottery class</figcaption></figure>
+            <figure class="a-photo"><img src="/assets/nodly-basketball-court.jpg" alt="Basketball" loading="lazy"><figcaption>basketball</figcaption></figure>
+            <figure class="a-photo"><img src="/assets/nodly-team-interests.jpg" alt="Board games" loading="lazy"><figcaption>board games</figcaption></figure>
+          </div>
+        </div>
+        <div class="a-block ruled">
+          <div class="label">what I learned</div>
+          <ol class="a-points">
+            <li data-n="01">iterate fast. don't build one thing for months.</li>
+            <li data-n="02">don't be afraid to step out of your comfort zone and talk to potential clients.</li>
+            <li data-n="03">build the MVP with Claude within one week.</li>
+            <li data-n="04">then go find someone who actually wants it.</li>
+          </ol>
+        </div>
+      </article>
+
+      <article id="p-dt" class="article" hidden>
+        <div class="a-main">
+          <div class="a-meta">
+            <span class="a-status"><span class="dot" style="background:var(--dt-red)" aria-hidden="true"></span>working here now</span>
+          </div>
+          <h3 class="a-name">Digital Turbine</h3>
+          <p class="a-line">internal tools used by different teams across the company.</p>
+          <p class="a-desc">I'm on App Mgmt, the team that owns the App object across the whole company. Digital Turbine is a mobile growth platform: it helps apps get discovered on people's phones and make money from ads.</p>
+          <div class="a-facts">
+            <div><b>Role</b><span>Senior Product Manager</span></div>
+            <div><b>Team</b><span>App Mgmt</span></div>
+            <div><b>Owns</b><span>the App object, company-wide</span></div>
+          </div>
+          <div class="a-links">
+            <a class="pill pill-soft" href="https://www.digitalturbine.com/" target="_blank" rel="noopener">digitalturbine.com<span class="ms" aria-hidden="true">arrow_outward</span></a>
+          </div>
+        </div>
+      </article>
+
+      <article id="p-pm" class="article" hidden>
+        <div class="a-main">
+          <div class="a-meta">
+            <span class="a-when">before 2025</span>
+            <span class="a-status"><span class="dot" style="background:var(--green)" aria-hidden="true"></span>shipped</span>
+          </div>
+          <h3 class="a-name">Product manager</h3>
+          <p class="a-line">years of building different products.</p>
+          <p class="a-desc">subscription apps and mobile games. not perfect, but these were my first real steps as a PM: monetization, talking to users, working with teams, shipping on time.</p>
+          <div class="a-facts">
+            <div><b>Built</b><span>subscription apps + games</span></div>
+            <div><b>Best hit</b><span>+95% ARPPU</span></div>
+            <div><b>Next</b><span>my own</span></div>
+          </div>
+          <div class="a-links">
+            <a class="pill pill-soft" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">LinkedIn<span class="ms" aria-hidden="true">arrow_outward</span></a>
+          </div>
+        </div>
+        <div class="a-block ruled" style="display:flex;flex-direction:column;gap:24px">
+          <div>
+            <div class="label">my best hits</div>
+            <div class="a-kpis">
+              <div class="a-kpi"><strong>+95%</strong><b>ARPPU</b><span>average revenue per paying user</span></div>
+              <div class="a-kpi"><strong>+30%</strong><b>conversion to payment</b><span>more people went from free to paid</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="label">things I shipped</div>
+            <div class="a-apps">
+              <a class="a-app" href="https://apps.apple.com/us/app/intermittent-fasting-and-diet/id6443584386" target="_blank" rel="noopener">
+                <img src="/assets/app-fasting.png" alt="" loading="lazy">
+                <span class="a-app-text"><b>Intermittent Fasting and Diet</b><small>iOS · Health &amp; Fitness · ★ 4.7 · 5.3K ratings</small><span>a fasting tracker that lives on subscriptions. this is where I learned why people pay.</span></span>
+                <span class="a-app-view">View</span>
+              </a>
+              <a class="a-app" href="https://play.google.com/store/apps/details?id=com.severex.bingo.lottery.number&amp;hl=en" target="_blank" rel="noopener">
+                <img src="/assets/app-bingo.png" alt="" loading="lazy">
+                <span class="a-app-text"><b>Bingo Lotto: Win Lucky Number</b><small>Android · casual game · 1M+ downloads · ★ 4.3</small><span>a casual bingo game with a million+ downloads. my crash course in what keeps players coming back.</span></span>
+                <span class="a-app-view">View</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="pitch">
+      <div class="widget pitch-card">
+        <div class="pitch-title">What should I build next?</div>
+        <p class="pitch-sub">the next MVP is not decided yet. pitch me a problem, an idea or just a coffee in Warsaw.</p>
+        <form class="pitch-form" id="pitch-form" data-contact-label="Reach me at:">
+          <div class="pitch-is" id="pitch-is">I want to pitch</div>
+          <div class="chips" role="group" aria-labelledby="pitch-is">
+            <button type="button" class="chip" data-ph="I waste 2 hours every week on..." aria-pressed="true">a problem</button>
+            <button type="button" class="chip" data-ph="an app that..." aria-pressed="false">an idea</button>
+            <button type="button" class="chip" data-ph="let's build ... together" aria-pressed="false">a collab</button>
+            <button type="button" class="chip" data-ph="free on thursday after 6?" aria-pressed="false">a coffee</button>
+          </div>
+          <textarea class="field" id="pitch-text" rows="3" placeholder="I waste 2 hours every week on..." aria-label="Your pitch"></textarea>
+          <div class="field-row">
+            <input id="pitch-contact" placeholder="your email or @telegram" aria-label="Your contact">
+            <button type="submit" class="send" disabled>Send</button>
+          </div>
+          <div class="form-note">opens your email app, then goes straight to my inbox</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 Why I built this -->
+<section id="why" class="why">
+  <h2>Why I built this</h2>
+  <div class="why-text">
+    <p>Hi, I'm <img class="why-avatar" src="/assets/mikalai-face.jpg" alt=""> <a href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener"><u>Mikalai</u> <img class="inline-icon" src="/assets/linkedin.svg" alt="LinkedIn" style="height:1em;vertical-align:-.15em"></a>, and I build Nodly in public.</p>
+    <p>for a long time I was <span class="mark">afraid to show anything</span>. but the best defense is offense, so I built this site.</p>
+    <p>I built it for three things:</p>
+    <ol>
+      <li><b>Show the fails.</b> tell everyone about my mistakes and fuckups, and track it all in one place.</li>
+      <li><b>Fight the fear.</b> beat my own fear, and maybe inspire others to fight theirs and build something too.</li>
+      <li><b>Find my people.</b> people who also want to make something useful and cool, and have fun doing it.</li>
+    </ol>
+    <p>Oh, and with Claude and ChatGPT, it's the <b>best time for non-technical people</b> to build something.</p>
+    <p>So I made this fuckup counter. it goes up every time I mess up.</p>
+  </div>
+
+  <div class="fails">
+    <div class="fails-head">
+      <span class="fails-num">06</span>
+      <span class="fails-meta">
+        <span class="label"><span class="pulse" aria-hidden="true"></span>Fuckup counter</span>
+        <span>fuckups so far · latest: value</span>
+      </span>
+      <button type="button" class="fails-toggle" id="fails-toggle" aria-expanded="false" data-more="Show all 6" data-less="Show less">Show all 6</button>
+    </div>
+    <div class="fails-list">
+      <div class="fail">
+        <button type="button" class="fail-btn" aria-expanded="true" aria-controls="fl-6"><span class="fail-n">#6</span><span class="fail-what">overestimated the value of my product and got value vs price wrong.</span><span class="fail-tag">value</span></button>
+        <div class="fail-lesson" id="fl-6"><b>Lesson</b><span>find high value for the client at a low cost for you. it's a craft you only learn by doing.</span></div>
+      </div>
+      <div class="fail">
+        <button type="button" class="fail-btn" aria-expanded="false" aria-controls="fl-5"><span class="fail-n">#5</span><span class="fail-what">tried to give the product away for free. setting a price felt scary. still fixing this one.</span><span class="fail-tag">pricing</span></button>
+        <div class="fail-lesson" id="fl-5" hidden><b>Lesson</b><span>set a price from day one. a trial is fine, but objections tell you the right price.</span></div>
+      </div>
+      <div class="fail">
+        <button type="button" class="fail-btn" aria-expanded="false" aria-controls="fl-4"><span class="fail-n">#4</span><span class="fail-what">liked saying I am a founder more than actually being one.</span><span class="fail-tag">mindset</span></button>
+        <div class="fail-lesson" id="fl-4" hidden><b>Lesson</b><span>the one who does wins. act in uncertainty and fear, talk later.</span></div>
+      </div>
+      <div class="fail" data-extra hidden>
+        <button type="button" class="fail-btn" aria-expanded="false" aria-controls="fl-3"><span class="fail-n">#3</span><span class="fail-what">was afraid to sell. Nodly already worked, but I kept growing the backlog to avoid the discomfort.</span><span class="fail-tag">sales</span></button>
+        <div class="fail-lesson" id="fl-3" hidden><b>Lesson</b><span>if it can be sold, even crooked, sell it now.</span></div>
+      </div>
+      <div class="fail" data-extra hidden>
+        <button type="button" class="fail-btn" aria-expanded="false" aria-controls="fl-2"><span class="fail-n">#2</span><span class="fail-what">lost weeks on the landing page, the design and the product name.</span><span class="fail-tag">perfectionism</span></button>
+        <div class="fail-lesson" id="fl-2" hidden><b>Lesson</b><span>design and the name come last. iterate fast, validate fast. be a bit more cynical.</span></div>
+      </div>
+      <div class="fail" data-extra hidden>
+        <button type="button" class="fail-btn" aria-expanded="false" aria-controls="fl-1"><span class="fail-n">#1</span><span class="fail-what">spent ~2 years building a huge product. did 10 HR interviews and never tried to sell, not even a raw MVP.</span><span class="fail-tag">validation</span></button>
+        <div class="fail-lesson" id="fl-1" hidden><b>Lesson</b><span>bring a rough MVP to the first interview and try to sell it.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 People & life -->
+<section id="life" class="wrap life">
+  <h2 class="section-title">People &amp; life</h2>
+  <p class="section-sub">the stuff around the build.</p>
+
+  <div class="life-grid">
+    <div class="life-col">
+      <div class="widget w-pad">
+        <div class="w-top">
+          <span class="w-kicker" style="color:oklch(0.5 0.13 285)"><span class="ms fill" aria-hidden="true">groups</span>Nodly crew</span>
+          <span class="w-aside">2025</span>
+        </div>
+        <div class="crew-photo"><img src="/assets/nodly-crew.jpg" alt="The Nodly crew" loading="lazy"></div>
+        <p class="w-note">the people who said yes to this idea. thank you for being with me and trusting it.</p>
+        <div class="thanks" style="background:oklch(0.96 0.03 285);color:oklch(0.45 0.13 285)"><span class="ms fill" aria-hidden="true">favorite</span>thank you, crew!</div>
+      </div>
+      <div class="widget w-pad li-card">
+        <div class="w-top"><span class="w-kicker" style="color:#0a66c2">LinkedIn</span><span class="w-aside">Oct 22, 2025</span></div>
+        <div class="li-title">Some people say “never mix friendship with work.”</div>
+        <div class="li-body">I think that’s exactly what makes work meaningful. I always felt in my bones that building a team is very similar to friendship.</div>
+        <div class="li-foot">
+          <span class="li-who"><img src="/assets/mikalai-face.jpg" alt="">Mikalai Dudko</span>
+          <span class="li-actions">
+            <a class="pill pill-sm li-read" href="https://www.linkedin.com/feed/update/urn:li:activity:7386739001292111872/" target="_blank" rel="noopener">Read<span class="ms" aria-hidden="true">arrow_outward</span></a>
+            <a class="pill pill-sm li-connect" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener"><span class="ms fill" aria-hidden="true">person_add</span>Connect</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="life-col">
+      <div class="widget people" style="display:flex;flex-direction:column;gap:14px">
+        <div class="w-top">
+          <span class="w-kicker" style="color:var(--love)"><span class="ms fill" aria-hidden="true">photo_library</span>My people</span>
+          <span class="w-aside" id="photo-pos" aria-live="polite">1 / 5</span>
+        </div>
+        <div class="carousel" id="carousel" tabindex="0" aria-label="My people photos">
+          <figure class="life-photo"><img src="/assets/life-4.jpg" alt="Hyrox, finished" loading="lazy"><figcaption><span class="ms fill" aria-hidden="true">favorite</span>Hyrox, finished</figcaption></figure>
+          <figure class="life-photo"><img src="/assets/life-6.jpg" alt="Family" loading="lazy"><figcaption><span class="ms fill" aria-hidden="true">favorite</span>family</figcaption></figure>
+          <figure class="life-photo"><img src="/assets/life-1.jpg" alt="My home" loading="lazy"><figcaption><span class="ms fill" aria-hidden="true">favorite</span>my home</figcaption></figure>
+          <figure class="life-photo"><img src="/assets/life-2.jpg" alt="Tenerife, Spain" loading="lazy"><figcaption><span class="ms fill" aria-hidden="true">favorite</span>Tenerife, Spain</figcaption></figure>
+          <figure class="life-photo"><img src="/assets/life-3.jpg" alt="Dolomites, Italy" loading="lazy"><figcaption><span class="ms fill" aria-hidden="true">favorite</span>Dolomites, Italy</figcaption></figure>
+        </div>
+        <div class="dots" id="photo-dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+        <p class="w-note">I believe the people in my life are the most important thing. so thank you, everybody.</p>
+        <div class="thanks" style="background:oklch(0.96 0.03 20);color:oklch(0.5 0.17 20)"><span class="ms fill" aria-hidden="true">favorite</span>thank you, everybody!</div>
+      </div>
+      <div class="widget w-pad clicker">
+        <div class="w-top">
+          <span class="w-kicker" style="font-weight:700"><span class="ms fill" aria-hidden="true">ads_click</span>Fuckup clicker</span>
+          <span class="w-sub">tap it</span>
+        </div>
+        <div class="clk-body">
+          <button type="button" class="clk-btn" id="clk-btn">I failed</button>
+          <div class="clk-text">
+            <span class="clk-count" id="clk-count" aria-live="polite">0</span>
+            <span class="clk-cap">one tap for every fuckup you made this year. no shame here.</span>
+            <span class="clk-mine">mine so far: 06</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="life-col">
+      <div class="widget w-pad follow-card" id="follow">
+        <div class="w-top">
+          <span class="w-kicker" style="color:oklch(0.6 0.2 25)"><span class="ms fill" aria-hidden="true">notifications_active</span>Follow</span>
+          <span class="w-aside">no spam</span>
+        </div>
+        <div class="follow-title">pick what you want to get.</div>
+        <div class="switches">
+          <button type="button" class="switch" role="switch" aria-checked="true" data-topic="Weekly build log"><span class="switch-text"><b>Weekly build log</b><small>what I built, what broke, what I learned</small></span><span class="track"></span></button>
+          <button type="button" class="switch" role="switch" aria-checked="true" data-topic="Fuckup stories"><span class="switch-text"><b>Fuckup stories</b><small>every fail and the real reason behind it</small></span><span class="track"></span></button>
+          <button type="button" class="switch" role="switch" aria-checked="false" data-topic="PM insights"><span class="switch-text"><b>PM insights</b><small>how to build and validate ideas fast</small></span><span class="track"></span></button>
+        </div>
+        <a class="pill pill-dark follow-btn" id="follow-btn" href="mailto:dudko.mikalai@gmail.com" data-subject="Follow: {topics}" data-body="Hi Mikalai, please add me to: {topics}."><span class="ms" aria-hidden="true">mail</span>Follow by email</a>
+        <div class="form-note">opens your email app. I add you by hand for now.</div>
+      </div>
+      <div class="widget w-pad ig">
+        <div class="w-top"><span class="w-kicker" style="color:oklch(0.56 0.22 355)">Instagram</span><span class="w-aside">@mikalai_dudko</span></div>
+        <div class="ig-who">
+          <span class="ig-ring"><img src="/assets/mikalai-face.jpg" alt=""></span>
+          <span class="ig-name"><b>Mikalai Dudko</b><small>life outside the build</small></span>
+          <a class="ig-follow" href="https://www.instagram.com/mikalai_dudko/" target="_blank" rel="noopener">Follow</a>
+        </div>
+        <div class="ig-grid">
+          <img src="/assets/ig-1.jpg" alt="Instagram post" loading="lazy">
+          <img src="/assets/ig-2.jpg" alt="Instagram post" loading="lazy">
+          <img src="/assets/ig-3.jpg" alt="Instagram post" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 Contact -->
+<section id="contact" class="wrap contact">
+  <h2>Let's build <span>something</span> together.</h2>
+  <div class="contact-grid">
+    <div class="contact-text">
+      <p class="strong">this is my story, and it's just the beginning.</p>
+      <p>if you have a proposition or an idea - reach out, I'm open to it.</p>
+      <p>I'm in Warsaw.</p>
+      <p>if you have an idea and you are scared to start - write me.</p>
+      <p>we can grab a coffee, talk about it and get out of the comfort zone together.</p>
+      <p class="strong">no pitch deck needed.</p>
+    </div>
+    <div class="contact-links">
+      <a class="c-row" href="https://www.linkedin.com/in/mikalai-dudko/" target="_blank" rel="noopener">
+        <span class="c-text"><b>LinkedIn</b><span>mikalai-dudko</span></span>
+        <span class="ms" aria-hidden="true">arrow_outward</span>
+      </a>
+      <a class="c-row" href="https://t.me/mikalai_dudko" target="_blank" rel="noopener">
+        <span class="c-text"><b>Telegram</b><span>@mikalai_dudko</span></span>
+        <span class="ms" aria-hidden="true">arrow_outward</span>
+      </a>
+      <div class="c-row">
+        <a class="c-text" href="mailto:dudko.mikalai@gmail.com"><b>Email</b><span>dudko.mikalai@gmail.com</span></a>
+        <button type="button" class="c-copy" data-copy-email data-label="copy" data-done="copied">copy</button>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <span>Mikalai Dudko · Warsaw · 2026</span>
+    <span>this site is also an MVP.</span>
+  </footer>
+</section>
+</main>
+
+<nav class="dock" aria-label="Site">
+  <a href="#me" aria-current="true"><span class="ms" aria-hidden="true">person</span><span>Me</span></a>
+  <a href="#journey" class="live"><span class="ms" aria-hidden="true">route</span><span>Journey</span></a>
+  <a href="#why"><span class="ms" aria-hidden="true">edit_note</span><span>Why</span></a>
+  <a href="#life"><span class="ms" aria-hidden="true">widgets</span><span>Life</span></a>
+  <a href="#contact"><span class="ms" aria-hidden="true">waving_hand</span><span>Contact</span></a>
+</nav>
 </body>
 </html>

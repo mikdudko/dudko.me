@@ -14,5 +14,7 @@ Every push to `main` deploys. Other branches get preview URLs.
 ## Layout
 
 - `public/` the live site
+  - `index.html` English (`/`), `ru/index.html` Russian (`/ru/`). Same markup, different text: change both together.
+  - `styles.css` and `app.js` are shared. All visible text lives in the HTML, including email subjects (`data-*` attributes).
 - `drafts/` design drafts (v2 = the Apple-style artifact version, not live)
 - `references/` design references, git-ignored
