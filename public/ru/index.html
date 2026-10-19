@@ -379,6 +379,19 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- Shipping: full width under the fuckup counter, joined to it by the fail → fix → ship bridge -->
+<div class="wrap ship-wrap">
+  <div class="bridge" aria-hidden="true">
+    <svg class="bridge-svg" viewBox="0 0 320 128" width="320" height="128">
+      <defs><linearGradient id="bridge-grad" x1="0" y1="0" x2="0" y2="128" gradientUnits="userSpaceOnUse"><stop offset="0" class="bridge-red"/><stop offset=".55" class="bridge-yellow"/><stop offset="1" class="bridge-green"/></linearGradient></defs>
+      <path class="bridge-line" d="M160 2 C160 30 214 28 216 58 C218 88 170 92 165 70 C160 48 206 46 203 77 C200 102 160 98 160 118"/>
+      <path class="bridge-head" d="M151 110 L160 120 L169 110"/>
+    </svg>
+    <span class="bridge-dot"></span>
+    <span class="bridge-note">факап → фикс → релиз</span>
+  </div>
   <div class="widget ship" id="shipping" hidden
        data-caption='{"one":"{n} вклад · 4 месяца","few":"{n} вклада · 4 месяца","many":"{n} вкладов · 4 месяца","other":"{n} вклада · 4 месяца"}'
        data-day='{"one":"{n} вклад","few":"{n} вклада","many":"{n} вкладов","other":"{n} вклада"}'
@@ -411,7 +424,7 @@
       <a class="ship-link" href="https://gitlab.com/dudko.mikalai" target="_blank" rel="noopener" data-track="social" data-track-to="gitlab">GitLab<span class="ms" aria-hidden="true">arrow_outward</span></a>
     </div>
   </div>
-</section>
+</div>
 
 <!-- 04 People & life -->
 <section id="life" class="wrap life">

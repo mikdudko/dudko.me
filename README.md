@@ -21,7 +21,7 @@ Local run: `npx wrangler dev` (needs Node). The email binding is simulated local
 
 ## Shipping widget
 
-The dark Shipping card under the fuckup counter (Why section) shows this week's days with activity, an 18-week heatmap and the two latest commits, with an All / GitHub / GitLab switch. The page loads it from `/api/shipping` (`src/shipping.js`), which reads public pages only, so no tokens are involved:
+The dark Shipping card, full width right after the fuckup counter (Why section), shows this week's days with activity, an 18-week heatmap and the two latest commits, with an All / GitHub / GitLab switch. The page loads it from `/api/shipping` (`src/shipping.js`), which reads public pages only, so no tokens are involved:
 
 - GitHub: daily counts from the contribution calendar at github.com/users/mikdudko/contributions, recent commits from the activity feed at github.com/mikdudko.atom (public repos only).
 - GitLab: daily counts from gitlab.com/users/dudko.mikalai/calendar.json. Work there is in private projects, so it only shows up when "Include private contributions on my profile" is on in GitLab's profile settings, and only as counts.
